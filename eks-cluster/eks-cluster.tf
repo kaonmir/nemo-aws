@@ -73,3 +73,12 @@ resource "aws_eks_cluster" "terraform-eks-cluster" {
     aws_iam_role_policy_attachment.terraform-eks-cluster-AmazonEKSVPCResourceController,
   ]
 }
+
+data "tls_certificate" "terraform-cert" {
+  url = aws_eks_cluster.terraform-eks-cluster.identity[0].oidc[0].issuer
+}
+resource "aws_iam_openid_connect_provider" "eks_oidc" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.tls_certificate.terraform-cert.certificates[0].sha1_fingerprint]
+  url             = aws_eks_cluster.terraform-eks-cluster.identity[0].oidc[0].issuer
+}
