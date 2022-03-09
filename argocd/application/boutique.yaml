@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: boutique
+  namespace: argocd
 spec:
   destination:
     namespace: default
@@ -16,6 +17,6 @@ spec:
     # helm:
     #   valueFiles:
     #     - values-prod.yaml
-  syncPolicy:
-    automated: {}
-    prune: true
+  # syncPolicy:
+  #   automated: {}
+  #   prune: true
