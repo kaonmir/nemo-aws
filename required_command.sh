@@ -1,16 +1,15 @@
-aws
-terraform
-kubectl
-istioctl
-argocd
+echo "Follow https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html to install AWS CLI"
 
+apt install linuxbrew-wrapper -y
+brew update
 
-istio => argocd
+brew install kubectl 
+brew install jq
+brew install argocd
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
 
 # install istioctl
 curl -sL https://istio.io/downloadIstioctl | sh -
 cp $HOME/.istioctl/bin/istioctl /usr/local/bin/istioctl
 rm -rf $HOME/.istioctl
-
-istioctl install --set profile=demo -y
-kubectl label namespace default istio-injection=enabled
