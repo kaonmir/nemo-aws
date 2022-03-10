@@ -2,3 +2,4 @@ trust.json
 test.sh
 .terraform*
 terraform.tfstate
+*.backup
