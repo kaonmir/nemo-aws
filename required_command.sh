@@ -13,3 +13,5 @@ brew install hashicorp/tap/terraform
 curl -sL https://istio.io/downloadIstioctl | sh -
 cp $HOME/.istioctl/bin/istioctl /usr/local/bin/istioctl
 rm -rf $HOME/.istioctl
+
+echo "In advanced to run this stuffs, you must login to AWS CLI with your credential."
