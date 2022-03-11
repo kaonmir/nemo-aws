@@ -3,7 +3,9 @@ variable "aws_region" {
 }
 
 variable "cluster_name" {
-  default = "terraform-eks"
-  type    = string
+  default = "nemo"
 }
 
+variable "route_53_domain" {
+  type = string
+}

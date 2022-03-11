@@ -1,10 +1,10 @@
 
 
-data "aws_eks_cluster" "terraform-eks-cluster" {
+data "aws_eks_cluster" "terraform_eks_cluster" {
   name = var.cluster_name
 }
 data "aws_iam_openid_connect_provider" "oidc" {
-  url = data.aws_eks_cluster.terraform-eks-cluster.identity[0].oidc[0].issuer
+  url = data.aws_eks_cluster.terraform_eks_cluster.identity[0].oidc[0].issuer
 }
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
