@@ -8,8 +8,5 @@ provider "aws" {
 }
 
 data "aws_availability_zones" "available" {
-  exclude_names = ["ap-northeast-2b", "ap-northeast-2d"]
+  exclude_names = []
 }
-
-# 기본 http get 요청 기능을 가지고 있는 모듈
-provider "http" {}
