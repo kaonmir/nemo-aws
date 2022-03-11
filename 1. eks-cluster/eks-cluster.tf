@@ -55,7 +55,7 @@ resource "aws_security_group_rule" "terraform-eks-cluster-ingress-workstation-ht
 }
 
 resource "aws_eks_cluster" "terraform-eks-cluster" {
-  name     = var.cluster-name
+  name     = var.cluster_name
   role_arn = aws_iam_role.terraform-eks-cluster.arn
   version  = "1.20"
 

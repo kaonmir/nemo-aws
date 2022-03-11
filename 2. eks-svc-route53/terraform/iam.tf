@@ -1,7 +1,7 @@
 
 
 data "aws_eks_cluster" "terraform-eks-cluster" {
-  name = var.cluster-name
+  name = var.cluster_name
 }
 data "aws_iam_openid_connect_provider" "oidc" {
   url = data.aws_eks_cluster.terraform-eks-cluster.identity[0].oidc[0].issuer

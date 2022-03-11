@@ -3,7 +3,7 @@ resource "aws_vpc" "terraform-eks-vpc" {
 
   tags = {
     "Name"                                      = "terraform-eks-node"
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "terraform-eks-public-subnet" {
 
   tags = {
     "Name"                                      = "terraform-eks-public-${count.index + 1 == 1 ? "a" : "c"}"
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_subnet" "terraform-eks-private-subnet" {
 
   tags = {
     "Name"                                      = "terraform-eks-private-${count.index + 1 == 1 ? "a" : "c"}"
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_subnet" "terraform-eks-trust-subnet" {
 
   tags = {
     "Name"                                      = "terraform-eks-trust-${count.index + 1 == 1 ? "a" : "c"}"
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 

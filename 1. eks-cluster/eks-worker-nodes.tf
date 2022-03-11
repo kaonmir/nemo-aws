@@ -33,16 +33,16 @@ resource "aws_iam_role_policy_attachment" "terraform-eks-node-AmazonEC2Container
 }
 
 # t3 small node group
-resource "aws_eks_node_group" "terraform-eks-t3-small" {
+resource "aws_eks_node_group" "nodegroup_1" {
   cluster_name    = aws_eks_cluster.terraform-eks-cluster.name
-  node_group_name = "terraform-eks-t3-small"
+  node_group_name = "nodegroup_1"
   node_role_arn   = aws_iam_role.terraform-eks-node.arn
   subnet_ids      = aws_subnet.terraform-eks-private-subnet[*].id
-  instance_types  = ["t3.medium"]
+  instance_types  = [var.nodegroup_instance_type]
   disk_size       = 20
 
   labels = {
-    "role" = "terraform-eks-t3-small"
+    "role" = "nodegroup_1"
   }
 
   scaling_config {
@@ -58,7 +58,7 @@ resource "aws_eks_node_group" "terraform-eks-t3-small" {
   ]
 
   tags = {
-    "Name" = "${aws_eks_cluster.terraform-eks-cluster.name}-terraform-eks-t3-small-Node"
+    "Name" = "${aws_eks_cluster.terraform-eks-cluster.name}-terraform-eks-Node"
   }
 }
 

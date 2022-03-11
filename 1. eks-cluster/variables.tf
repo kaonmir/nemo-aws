@@ -1,9 +1,13 @@
 variable "aws_region" {
-  default = "ap-northeast-2"
+  type = string
 }
 
-variable "cluster-name" {
-  default = "terraform-eks"
+variable "cluster_name" {
+  type = string
+}
+
+variable "nodegroup_instance_type" {
   type    = string
+  default = "t3.small"
 }
 
