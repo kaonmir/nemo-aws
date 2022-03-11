@@ -45,7 +45,7 @@ resource "aws_security_group" "terraform_eks_cluster" {
 }
 
 resource "aws_security_group_rule" "terraform_eks_cluster_ingress_workstation_https" {
-  cidr_blocks       = []
+  cidr_blocks       = ["10.110.0.0/16"]
   description       = "Allow workstation to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
@@ -81,4 +81,54 @@ resource "aws_iam_openid_connect_provider" "eks_oidc" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [data.tls_certificate.terraform_cert.certificates[0].sha1_fingerprint]
   url             = aws_eks_cluster.terraform_eks_cluster.identity[0].oidc[0].issuer
+}
+
+resource "local_file" "kube_config" {
+
+  content = replace(yamlencode({
+    apiVersion = "v1",
+    clusters = [
+      {
+        cluster = {
+          certificate-authority-data = aws_eks_cluster.terraform_eks_cluster.certificate_authority[0].data
+          server                     = aws_eks_cluster.terraform_eks_cluster.endpoint
+        },
+        name = "kubernetes"
+      }
+    ],
+    contexts = [
+      {
+        context = {
+          cluster   = "kubernetes",
+          namespace = "default",
+          user      = "aws"
+        },
+        name = "aws"
+      }
+    ],
+    current-context = "aws",
+    kind            = "Config",
+    preferences     = {},
+    users = [
+      {
+        name = "aws",
+        user = {
+          exec = {
+            apiVersion = "client.authentication.k8s.io/v1alpha1",
+            args = [
+              "eks",
+              "get-token",
+              "--cluster-name",
+              aws_eks_cluster.terraform_eks_cluster.name
+            ],
+            command            = "aws",
+            env                = null,
+            interactiveMode    = "IfAvailable",
+            provideClusterInfo = false
+          }
+        }
+      }
+    ]
+  }), "/((?:^|\n)[\\s-]*)\"([\\w-]+)\":/", "$1$2:")
+  filename = pathexpand("~/.kube/config")
 }
