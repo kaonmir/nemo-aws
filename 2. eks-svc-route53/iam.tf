@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:kube-system:aws-node"]
+      values   = ["system:serviceaccount:kube-system:external-dns"]
     }
     condition {
       test     = "StringEquals"
@@ -28,7 +28,6 @@ data "aws_iam_policy_document" "assume_role_policy" {
     }
   }
 }
-
 # ---
 
 resource "aws_iam_policy" "EKSExternalDNSAccess" {
