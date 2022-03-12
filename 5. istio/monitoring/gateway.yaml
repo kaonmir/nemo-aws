@@ -4,6 +4,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: argocd.nemo.kaonmir.xyz
     external-dns.alpha.kubernetes.io/hostname: kiali.nemo.kaonmir.xyz
+    external-dns.alpha.kubernetes.io/hostname: grafana.nemo.kaonmir.xyz
   name: monitor-gateway
 spec:
   selector:
@@ -11,13 +12,9 @@ spec:
   servers:
     - hosts:
         - argocd.nemo.kaonmir.xyz
+        - kiali.nemo.kaonmir.xyz 
+        - grafana.nemo.kaonmir.xyz
       port:
-        name: argocd-http
-        number: 80
-        protocol: HTTP
-    - hosts:
-        - kiali.nemo.kaonmir.xyz
-      port:
-        name: kiali-http
+        name: http
         number: 80
         protocol: HTTP
