@@ -16,6 +16,11 @@ data "aws_iam_policy_document" "assume_role_policy" {
       variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:aws-node"]
     }
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
 
     principals {
       identifiers = [data.aws_iam_openid_connect_provider.oidc.arn]
