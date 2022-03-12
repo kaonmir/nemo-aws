@@ -94,7 +94,7 @@ resource "aws_eks_node_group" "nodegroup_admin" {
   }
 
   taint {
-    key    = "TAINED_BY_ADMIN_PLUGIN"
+    key    = "TAINED_BY_ADMIN"
     effect = "NO_SCHEDULE"
   }
 }

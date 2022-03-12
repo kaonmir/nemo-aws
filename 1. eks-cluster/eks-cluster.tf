@@ -57,7 +57,7 @@ resource "aws_security_group_rule" "terraform_eks_cluster_ingress_workstation_ht
 resource "aws_eks_cluster" "terraform_eks_cluster" {
   name     = var.cluster_name
   role_arn = aws_iam_role.terraform_eks_cluster.arn
-  version  = "1.20"
+  version  = "1.21"
 
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
@@ -84,7 +84,6 @@ resource "aws_iam_openid_connect_provider" "eks_oidc" {
 }
 
 resource "local_file" "kube_config" {
-
   content = replace(yamlencode({
     apiVersion = "v1",
     clusters = [
