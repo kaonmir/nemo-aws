@@ -53,3 +53,10 @@ resource "aws_iam_role" "EKSExternalDNSAccessRole" {
   managed_policy_arns = [aws_iam_policy.EKSExternalDNSAccess.arn]
   name                = "EKSExternalDNSAccessRole"
 }
+
+# ---
+
+resource "aws_iam_role_policy_attachment" "terraform_eks_node_AmazonEKSWorkerNodePolicy" {
+  policy_arn = aws_iam_policy.EKSExternalDNSAccess.arn
+  role       = "terraform_eks_node"
+}
