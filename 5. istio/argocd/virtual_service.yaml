@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argocd
+  # namespace: argocd
+spec:
+  gateways:
+    - default/monitor-gateway # namespace/gateway
+  hosts:
+    - argocd.nemo.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: frontend.default.svc.cluster.local
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: kiali
+  # namespace: monitoring
+spec:
+  gateways:
+    - default/monitor-gateway # namespace/gateway
+  hosts:
+    - kiali.nemo.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: kiali.monitoring.svc.cluster.local
+            port:
+              number: 20001

@@ -83,7 +83,8 @@ repoServer:
   replicas: 1
   podAnnotations: {}
   podLabels: {}
-  nodeSelector: { role: nodegroup_admin }
+  nodeSelector:
+    role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
@@ -99,16 +100,14 @@ configs:
   gpgKeysAnnotations: {}
   gpgKeys: {}
   knownHostsAnnotations: {}
-  secret:
-    createSecret: true
-    annotations: {}
-    githubSecret: ""
-    gitlabSecret: ""
-    gogsSecret: ""
-    extra: {}
-    argocdServerTlsConfig: {}
-    argocdServerAdminPassword: ""
-    argocdServerAdminPasswordMtime: ""
+  # secret:
+  #   createSecret: true
+  #   annotations: {}
+  #   githubSecret: ""
+  #   gitlabSecret: ""
+  #   gogsSecret: ""
+  #   extra: {}
+  #   argocdServerTlsConfig: {}
+  #   argocdServerAdminPassword: ""
+  #   argocdServerAdminPasswordMtime: ""
   styles: ""
-openshift:
-  enabled: false
