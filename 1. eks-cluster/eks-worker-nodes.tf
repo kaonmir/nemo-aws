@@ -32,17 +32,17 @@ resource "aws_iam_role_policy_attachment" "terraform_eks_node_AmazonEC2Container
   role       = aws_iam_role.terraform_eks_node.name
 }
 
-# t3 small node group
-resource "aws_eks_node_group" "nodegroup_1" {
+# t3 small node group for business logics
+resource "aws_eks_node_group" "nodegroup_business" {
   cluster_name    = aws_eks_cluster.terraform_eks_cluster.name
-  node_group_name = "nodegroup_1"
+  node_group_name = "nodegroup_business"
   node_role_arn   = aws_iam_role.terraform_eks_node.arn
   subnet_ids      = aws_subnet.terraform_eks_private_subnet[*].id
   instance_types  = [var.nodegroup_instance_type]
-  disk_size       = 20
+  disk_size       = 15
 
   labels = {
-    "role" = "nodegroup_1"
+    "role" = "nodegroup_business"
   }
 
   scaling_config {
@@ -59,6 +59,42 @@ resource "aws_eks_node_group" "nodegroup_1" {
 
   tags = {
     "Name" = "${aws_eks_cluster.terraform_eks_cluster.name}_terraform_eks_Node"
+    "role" = "business"
   }
 }
 
+# t3 small node group for admin
+resource "aws_eks_node_group" "nodegroup_admin" {
+  cluster_name    = aws_eks_cluster.terraform_eks_cluster.name
+  node_group_name = "nodegroup_admin"
+  node_role_arn   = aws_iam_role.terraform_eks_node.arn
+  subnet_ids      = aws_subnet.terraform_eks_private_subnet[*].id
+  instance_types  = [var.nodegroup_instance_type]
+  disk_size       = 10
+
+  labels = {
+    "role" = "nodegroup_admin"
+  }
+
+  scaling_config {
+    desired_size = 1
+    min_size     = 2
+    max_size     = 1
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.terraform_eks_node_AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.terraform_eks_node_AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.terraform_eks_node_AmazonEC2ContainerRegistryReadOnly,
+  ]
+
+  tags = {
+    "Name" = "${aws_eks_cluster.terraform_eks_cluster.name}_terraform_eks_Node"
+    "Role" = "admin"
+  }
+
+  taint {
+    key    = "TAINED_BY_ADMIN_PLUGIN"
+    effect = "NO_SCHEDULE"
+  }
+}
