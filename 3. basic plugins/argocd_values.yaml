@@ -1,15 +1,4 @@
 controller:
-  replicas: 1
-  args:
-    statusProcessors: "20"
-    operationProcessors: "10"
-    appResyncPeriod: "180"
-    selfHealTimeout: "5"
-    repoServerTimeoutSeconds: "60"
-  podAnnotations: {}
-  podLabels: {}
-  volumeMounts: []
-  volumes: []
   nodeSelector:
     role: nodegroup_admin
   tolerations:
@@ -17,10 +6,6 @@ controller:
       operator: "Exists"
       effect: "NoSchedule"
 dex:
-  env: []
-  envFrom: []
-  podAnnotations: {}
-  podLabels: {}
   nodeSelector:
     role: nodegroup_admin
   tolerations:
@@ -37,82 +22,16 @@ redis:
       operator: "Exists"
       effect: "NoSchedule"
 server:
-  replicas: 1
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 5
-    targetCPUUtilizationPercentage: 50
-    targetMemoryUtilizationPercentage: 50
-  podAnnotations: {}
-  podLabels: {}
-  containerPort: 8080
   nodeSelector:
     role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
       effect: "NoSchedule"
-  affinity: {}
-  certificate:
-    enabled: false
-    domain: "argocd.nemo.kaonmir.xyz"
-    issuer:
-      kind:
-      name:
-    additionalHosts: []
-    secretName: argocd-server-tls
-  ingressGrpc:
-    enabled: false
-    isAWSALB: false
-    annotations: {}
-    labels: {}
-    ingressClassName: ""
-    awsALB:
-      serviceType: ClusterIp
-      backendProtocolVersion: HTTP2
-    hosts:
-      - "argocd.nemo.kaonmir.xyz"
-    paths:
-      - /
-    pathType: Prefix
-    extraPaths: []
-    tls: []
-    https: false
-  configEnabled: true
-  config:
-    url: argocd.nemo.kaonmir.xyz
-    application.instanceLabelKey: argocd.argoproj.io/instance
-
 repoServer:
-  replicas: 1
-  podAnnotations: {}
-  podLabels: {}
   nodeSelector:
     role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
       effect: "NoSchedule"
-  affinity: {}
-  service:
-    annotations: {}
-    labels: {}
-    port: 8081
-    portName: https-repo-server
-configs:
-  clusterCredentials: []
-  gpgKeysAnnotations: {}
-  gpgKeys: {}
-  knownHostsAnnotations: {}
-  secret:
-    createSecret: true
-    annotations: {}
-    githubSecret: ""
-    gitlabSecret: ""
-    gogsSecret: ""
-    extra: {}
-    argocdServerTlsConfig: {}
-    argocdServerAdminPassword: $2b$10$QkGQL1L00nBebiuIXlCYFOOBUVkTt/Z96.mHLWGAUDvNXsM1AxNbS
-    argocdServerAdminPasswordMtime: 2020-07-01T00:00:00Z
-  styles: ""

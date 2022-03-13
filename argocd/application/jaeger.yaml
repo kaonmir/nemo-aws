@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger
+  namespace: argocd
+spec:
+  destination:
+    namespace: istio-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    # repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
+    # targetRevision: HEAD
+    # path: release
+    repoURL: https://jaegertracing.github.io/helm-charts
+    chart: jaeger
+    targetRevision: 0.55.0
+    helm:
+      values: |
+        agent:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+        collector:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+        query:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+  # syncPolicy:
+  #   automated: {}
+  #   prune: true
