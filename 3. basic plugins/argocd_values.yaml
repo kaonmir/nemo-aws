@@ -10,7 +10,8 @@ controller:
   podLabels: {}
   volumeMounts: []
   volumes: []
-  nodeSelector: { role: nodegroup_admin }
+  nodeSelector:
+    role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
@@ -20,7 +21,8 @@ dex:
   envFrom: []
   podAnnotations: {}
   podLabels: {}
-  nodeSelector: { role: nodegroup_admin }
+  nodeSelector:
+    role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
@@ -28,7 +30,8 @@ dex:
 redis:
   podAnnotations: {}
   podLabels: {}
-  nodeSelector: { role: nodegroup_admin }
+  nodeSelector:
+    role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
@@ -44,7 +47,8 @@ server:
   podAnnotations: {}
   podLabels: {}
   containerPort: 8080
-  nodeSelector: { role: nodegroup_admin }
+  nodeSelector:
+    role: nodegroup_admin
   tolerations:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
@@ -52,7 +56,7 @@ server:
   affinity: {}
   certificate:
     enabled: false
-    domain: argocd.example.com
+    domain: "argocd.nemo.kaonmir.xyz"
     issuer:
       kind:
       name:
@@ -65,9 +69,10 @@ server:
     labels: {}
     ingressClassName: ""
     awsALB:
-      serviceType: NodePort
+      serviceType: ClusterIp
       backendProtocolVersion: HTTP2
-    hosts: []
+    hosts:
+      - "argocd.nemo.kaonmir.xyz"
     paths:
       - /
     pathType: Prefix
@@ -76,7 +81,7 @@ server:
     https: false
   configEnabled: true
   config:
-    url: https://argocd.example.com
+    url: argocd.nemo.kaonmir.xyz
     application.instanceLabelKey: argocd.argoproj.io/instance
 
 repoServer:
@@ -100,14 +105,14 @@ configs:
   gpgKeysAnnotations: {}
   gpgKeys: {}
   knownHostsAnnotations: {}
-  # secret:
-  #   createSecret: true
-  #   annotations: {}
-  #   githubSecret: ""
-  #   gitlabSecret: ""
-  #   gogsSecret: ""
-  #   extra: {}
-  #   argocdServerTlsConfig: {}
-  #   argocdServerAdminPassword: ""
-  #   argocdServerAdminPasswordMtime: ""
+  secret:
+    createSecret: true
+    annotations: {}
+    githubSecret: ""
+    gitlabSecret: ""
+    gogsSecret: ""
+    extra: {}
+    argocdServerTlsConfig: {}
+    argocdServerAdminPassword: $2b$10$QkGQL1L00nBebiuIXlCYFOOBUVkTt/Z96.mHLWGAUDvNXsM1AxNbS
+    argocdServerAdminPasswordMtime: 2020-07-01T00:00:00Z
   styles: ""

@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: monitoring
+    namespace: istio-system
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -17,6 +17,7 @@ spec:
     targetRevision: 1.46.0
     helm:
       values: |
+        istio_namespace: istio-system
         deployment:
           node_selector:
             role: nodegroup_admin
@@ -24,6 +25,9 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
+        external_services:
+          prometheus:
+            url: http://prometheus-server.istio-system:80
   # syncPolicy:
   #   automated: {}
   #   prune: true
