@@ -6,7 +6,7 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: kiali.nemo.kaonmir.xyz
     external-dns.alpha.kubernetes.io/hostname: grafana.nemo.kaonmir.xyz
   name: monitor-gateway
-  namespace: default
+  namespace: network
 spec:
   selector:
     istio: ingressgateway
@@ -19,3 +19,16 @@ spec:
         name: http
         number: 80
         protocol: HTTP
+      tls:
+        httpsRedirect: true # sends 301 redirect for http requests
+    - hosts:
+        - argocd.nemo.kaonmir.xyz
+        - kiali.nemo.kaonmir.xyz 
+        - grafana.nemo.kaonmir.xyz
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: for-all

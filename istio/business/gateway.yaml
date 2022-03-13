@@ -4,7 +4,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: boutique.nemo.kaonmir.xyz
   name: business-gateway
-  namespace: default
+  namespace: network
 spec:
   selector:
     istio: ingressgateway
@@ -15,3 +15,13 @@ spec:
         name: http
         number: 80
         protocol: HTTP
+    - hosts:
+        - boutique.nemo.kaonmir.xyz
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: PASSTHROUGH
+        # mode: SIMPLE
+        # credentialName: certificate/for-all

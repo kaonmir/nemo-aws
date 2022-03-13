@@ -1,5 +1,5 @@
 # -- Creating Root CA using AWS PCA
-resource "kubernetes_manifest" "nemo-root-ca" {
+resource "kubernetes_manifest" "nemo_root_ca" {
   manifest = {
     apiVersion = "awspca.cert-manager.io/v1beta1"
     kind       = "AWSPCAClusterIssuer"
@@ -12,7 +12,4 @@ resource "kubernetes_manifest" "nemo-root-ca" {
     }
   }
 }
-
-# -- Below are the certificate using upper Root CA
-
 

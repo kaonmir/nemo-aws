@@ -7,12 +7,10 @@ resource "aws_acmpca_certificate_authority" "nemo_ca" {
       common_name  = "nemo coperate"
       country      = "KR"
       organization = "nemo"
-      state        = "Seoul"
     }
   }
 
-  type = "ROOT"
-
+  type                            = "ROOT"
   permanent_deletion_time_in_days = 7
 }
 

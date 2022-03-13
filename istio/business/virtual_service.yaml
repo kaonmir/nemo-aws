@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: boutique
-  namespace: default
+  namespace: network
 spec:
   gateways:
-    - default/business-gateway # namespace/gateway
+    - network/business-gateway # namespace/gateway
   hosts:
     - boutique.nemo.kaonmir.xyz
   http:

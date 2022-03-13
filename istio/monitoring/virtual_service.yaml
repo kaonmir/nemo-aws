@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: argocd
-  namespace: default
+  namespace: network
 spec:
   gateways:
-    - default/monitor-gateway # namespace/gateway
+    - network/monitor-gateway # namespace/gateway
   hosts:
     - argocd.nemo.kaonmir.xyz
   http:
@@ -13,16 +13,16 @@ spec:
         - destination:
             host: "argocd-server.argocd.svc.cluster.local"
             port:
-              number: 80
+              number: 443
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: kiali
-  namespace: default
+  namespace: network
 spec:
   gateways:
-    - default/monitor-gateway # namespace/gateway
+    - network/monitor-gateway # namespace/gateway
   hosts:
     - kiali.nemo.kaonmir.xyz
   http:
@@ -36,10 +36,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: grafana
-  namespace: default
+  namespace: network
 spec:
   gateways:
-    - default/monitor-gateway # namespace/gateway
+    - network/monitor-gateway # namespace/gateway
   hosts:
     - grafana.nemo.kaonmir.xyz
   http:
