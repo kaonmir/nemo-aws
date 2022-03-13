@@ -20,3 +20,5 @@ New argocd admin account is defined by default. ID is `admin` and PW is shown by
 `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
 
 If you want to change admin password as default, use this command
+
+By the way, in this example I set it to **"admin1234"** as a defualt
