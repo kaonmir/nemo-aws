@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    # repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
+    # targetRevision: HEAD
+    # path: release
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: 1.7.1
+    helm:
+      values: |
+        installCRDs: true
+        prometheus:
+          enabled: false
+        nodeSelector:
+          role: nodegroup_admin
+        tolerations:
+          - key: "TAINED_BY_ADMIN"
+            operator: "Exists"
+            effect: "NoSchedule"
+        webhook:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+        cainjector:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+        startupapicheck:
+          nodeSelector:
+            role: nodegroup_admin
+          tolerations:
+            - key: "TAINED_BY_ADMIN"
+              operator: "Exists"
+              effect: "NoSchedule"
+  # syncPolicy:
+  #   automated: {}
+  #   prune: true

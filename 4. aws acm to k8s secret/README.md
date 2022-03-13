@@ -1,5 +1,7 @@
 ## AWS ACM to K8S Secret
 
-In this chapter, we will associate AWS ACM and EKS cluster.
+### prerequisite
 
-1. install k8s addon **cert-manager** to get AWS certificates.
+`cert-manager` and `aws-privateca-issuer` should be installed on EKS cluster.
+If not, use argocd application on `argocd/application`
+
