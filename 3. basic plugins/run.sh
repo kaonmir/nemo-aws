@@ -10,7 +10,7 @@ FluentBitReadFromHead='Off'
 [[ ${FluentBitReadFromHead} = 'On' ]] && FluentBitReadFromTail='Off'|| FluentBitReadFromTail='On'
 [[ -z ${FluentBitHttpPort} ]] && FluentBitHttpServer='Off' || FluentBitHttpServer='On'
 curl https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/quickstart/cwagent-fluent-bit-quickstart.yaml | sed 's/{{cluster_name}}/'${CLUSTER_NAME}'/;s/{{region_name}}/'${REGION_NAME}'/;s/{{http_server_toggle}}/"'${FluentBitHttpServer}'"/;s/{{http_server_port}}/"'${FluentBitHttpPort}'"/;s/{{read_from_head}}/"'${FluentBitReadFromHead}'"/;s/{{read_from_tail}}/"'${FluentBitReadFromTail}'"/' | kubectl apply -f -
-aws iam attach-role-policy --role-name terraform_eks_node --policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+aws iam attach-role-policy --role-name nemo_eks_node --policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
 
 # TODO And make multiple gateways for each admin, and business apps
 # Install Istiod, IngressGateway to EKS cluster

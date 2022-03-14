@@ -1,10 +1,10 @@
 
 
-data "aws_eks_cluster" "terraform_eks_cluster" {
+data "aws_eks_cluster" "nemo_eks_cluster" {
   name = var.cluster_name
 }
 data "aws_iam_openid_connect_provider" "oidc" {
-  url = data.aws_eks_cluster.terraform_eks_cluster.identity[0].oidc[0].issuer
+  url = data.aws_eks_cluster.nemo_eks_cluster.identity[0].oidc[0].issuer
 }
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
@@ -60,7 +60,7 @@ resource "aws_iam_role" "EKSExternalDNSAccessRole" {
 
 # ---
 
-resource "aws_iam_role_policy_attachment" "terraform_eks_node_AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "nemo_eks_node_AmazonEKSWorkerNodePolicy" {
   policy_arn = aws_iam_policy.EKSExternalDNSAccess.arn
-  role       = "terraform_eks_node"
+  role       = "nemo_eks_node"
 }

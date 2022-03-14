@@ -21,7 +21,7 @@ resource "aws_iam_policy" "EKSAWSPCAIssuer" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "terraform_eks_node_AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "nemo_eks_node_AmazonEKSWorkerNodePolicy" {
   policy_arn = aws_iam_policy.EKSAWSPCAIssuer.arn
-  role       = "terraform_eks_node"
+  role       = "nemo_eks_node"
 }
