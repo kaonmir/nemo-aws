@@ -1,5 +1,3 @@
-
-
 data "aws_eks_cluster" "nemo_eks_cluster" {
   name = var.cluster_name
 }
@@ -14,7 +12,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:kube-system:external-dns"]
+      values   = ["system:serviceaccount:${local.serviceaccount-namespace}:${local.serviceaccount-name}"]
     }
     condition {
       test     = "StringEquals"
@@ -28,39 +26,35 @@ data "aws_iam_policy_document" "assume_role_policy" {
     }
   }
 }
-# ---
 
-resource "aws_iam_policy" "EKSExternalDNSAccess" {
-  name        = "EKSExternalDNSAccess"
+resource "aws_iam_policy" "k8s_asg_policy" {
+  name        = "EKSASGPolicy"
   path        = "/"
-  description = "Policy to access Route53"
+  description = "Policy allowing to set ASG"
 
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Effect   = "Allow",
-        Action   = ["route53:ChangeResourceRecordSets"],
-        Resource = ["arn:aws:route53:::hostedzone/*"]
-      },
-      {
-        Effect   = "Allow",
-        Action   = ["route53:ListHostedZones", "route53:ListResourceRecordSets"],
+        Effect = "Allow",
+        Action = [
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:DescribeAutoScalingGroups",
+          "ec2:DescribeLaunchTemplateVersions",
+          "autoscaling:DescribeTags",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:TerminateInstanceInAutoScalingGroup"
+        ],
         Resource = ["*"]
       }
     ]
   })
 }
 
-# Making IRSA (IAM Role for Service Account)
-resource "aws_iam_role" "EKSExternalDNSAccessRole" {
+# Making IRSA (IAM Role for Service Account) for EKS
+resource "aws_iam_role" "k8s-asg-policy" {
   assume_role_policy  = data.aws_iam_policy_document.assume_role_policy.json
-  managed_policy_arns = [aws_iam_policy.EKSExternalDNSAccess.arn]
-  name                = "EKSExternalDNSAccessRole"
-}
-
-# Attaching IAM policy to EKS Worker node
-resource "aws_iam_role_policy_attachment" "nemo_eks_node_AmazonEKSWorkerNodePolicy" {
-  policy_arn = aws_iam_policy.EKSExternalDNSAccess.arn
-  role       = "nemo_eks_node"
+  managed_policy_arns = [aws_iam_policy.k8s_asg_policy.arn]
+  name                = "AmazonEKSClusterAutoscalerRole"
 }
