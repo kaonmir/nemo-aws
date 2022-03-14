@@ -7,12 +7,13 @@ provider "aws" {
   region = var.aws_region
 }
 
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+  config_context = "aws"
+}
+
 provider "helm" {
   kubernetes {
     config_path = "~/.kube/config"
   }
-}
-
-data "aws_availability_zones" "available" {
-  exclude_names = []
 }
