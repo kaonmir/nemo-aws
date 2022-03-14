@@ -2,8 +2,6 @@
 
 # Istiod
 kubectl create namespace istio-system
-kubectl create namespace istio-ingress
-kubectl annotate namespace istio-ingress istio-injection=enabled --overwrite 
 helm repo add istio https://istio-release.storage.googleapis.com/charts
 helm install base istio/base -n istio-system
 helm install istiod istio/istiod -n istio-system
@@ -17,6 +15,17 @@ helm install argocd argocd/argo-cd -n argocd -f values/argocd.yaml
 # Kiali
 helm repo add kiali https://kiali.org/helm-charts
 helm install kiali kiali/kiali-server -n istio-system -f values/kiali.yaml
+
+# Jaeger
+# helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+# helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
+
+# Prometheus & Grafana
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus/prometheus -n istio-system -f values/prometheus.yaml
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
+
 
 
 kubectl label namespace default istio-injection=enabled
