@@ -1,14 +1,16 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: argocd.nemo.kaonmir.xyz
+  name: monitor-gateway
   namespace: default
 spec:
   selector:
-    istio: gateway
+    istio: ingressgateway
   servers:
     - hosts:
-        - "*"
+        - argocd.nemo.kaonmir.xyz
       port:
         name: http
         number: 80

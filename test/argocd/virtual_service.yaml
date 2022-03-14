@@ -1,16 +1,16 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: boutique
+  name: argocd
   namespace: default
 spec:
   gateways:
-    - default/business-gateway # namespace/gateway
+    - default/monitor-gateway # namespace/gateway
   hosts:
-    - boutique.nemo.kaonmir.xyz
+    - argocd.nemo.kaonmir.xyz
   http:
     - route:
         - destination:
-            host: frontend.default.svc.cluster.local
+            host: "argocd-server.argocd.svc.cluster.local"
             port:
               number: 80
