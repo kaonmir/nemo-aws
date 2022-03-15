@@ -26,8 +26,6 @@ helm install prometheus prometheus/prometheus -n istio-system -f values/promethe
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
 
-
-
 kubectl label namespace default istio-injection=enabled
 
 # TODO And make multiple gateways for each admin, and business apps
@@ -36,8 +34,9 @@ ISTIO_HOSTNAME=$(kubectl get svc -n istio-system istio-ingressgateway -o jsonpat
 echo "Istio ingress is running on host \"$ISTIO_HOSTNAME\""
 
 ARGOCD_PW=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
-echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW'"
+echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you changed"
 
+GRAFANA_PW=
 
 ## Legacy
 # Installl CloudWatch agent and Fluentd. So the logs and metrics are sent to CloudWatch

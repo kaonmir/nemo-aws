@@ -6,3 +6,5 @@ tolerations:
     effect: "NoSchedule"
 persistence:
   enabled: true
+# adminUser: admin
+# adminPassword: admin1234

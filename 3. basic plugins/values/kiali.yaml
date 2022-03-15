@@ -5,3 +5,12 @@ deployment:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
       effect: "NoSchedule"
+
+external_services:
+  # custom_dashboards:
+  #   enabled: true
+  prometheus:
+    url: "http://prometheus-server.istio-system:9090"
+    cache_enabled: true
+    cache_duration: 10
+    cache_expiration: 300

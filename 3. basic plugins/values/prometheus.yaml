@@ -28,3 +28,6 @@ server:
       effect: "NoSchedule"
   persistentVolume:
     storageClass: "gp2"
+
+  service:
+    servicePort: 9090

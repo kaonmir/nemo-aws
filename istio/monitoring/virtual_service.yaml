@@ -1,19 +1,19 @@
-# apiVersion: networking.istio.io/v1beta1
-# kind: VirtualService
-# metadata:
-#   name: argocd
-#   namespace: default
-# spec:
-#   gateways:
-#     - default/monitor-gateway # namespace/gateway
-#   hosts:
-#     - argocd.nemo.kaonmir.xyz
-#   http:
-#     - route:
-#         - destination:
-#             host: "argocd-server.argocd.svc.cluster.local"
-#             port:
-#               number: 80
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argocd
+  namespace: default
+spec:
+  gateways:
+    - default/gateway # namespace/gateway
+  hosts:
+    - argocd.nemo.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: "argocd-server.argocd.svc.cluster.local"
+            port:
+              number: 80
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
