@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# Calico
+helm repo add projectcalico https://docs.projectcalico.org/charts
+helm install calico projectcalico/tigera-operator --version v3.21.4
+
 # Istiod
 kubectl create namespace istio-system
 helm repo add istio https://istio-release.storage.googleapis.com/charts
 helm install base istio/base -n istio-system
-helm install istiod istio/istiod -n istio-system
+helm install istiod istio/istiod -n istio-system -f values/istiod.yaml
 helm install istio-gateway istio/gateway -n istio-system -f values/istio-gateway.yaml
 
 # Argocd 
@@ -17,8 +21,9 @@ helm repo add kiali https://kiali.org/helm-charts
 helm install kiali kiali/kiali-server -n istio-system -f values/kiali.yaml
 
 # Jaeger
-# helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
-# helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
+
 
 # Prometheus & Grafana
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
@@ -36,7 +41,10 @@ echo "Istio ingress is running on host \"$ISTIO_HOSTNAME\""
 ARGOCD_PW=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
 echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you changed"
 
-GRAFANA_PW=
+# Kiali
+KIALI_TOKEN_NAME=$(kubectl get sa kiali -n istio-system -o jsonpath="{.secrets[0].name}")
+KIALI_TOKEN=$(kubectl get secret -n istio-system $KIALI_TOKEN_NAME -o jsonpath="{.data.token}" | base64 -d)
+echo "Kiali is running with token $KIALI_TOKEN"
 
 ## Legacy
 # Installl CloudWatch agent and Fluentd. So the logs and metrics are sent to CloudWatch

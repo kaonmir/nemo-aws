@@ -98,7 +98,7 @@ resource "kubernetes_deployment" "external_dns" {
             "--policy=upsert-only",   # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
             "--aws-zone-type=public", # only look at public hosted zones (valid values are public, private or no value for both)
             "--registry=txt",
-            "--txt-owner-id=${aws_route53_zone.eks_nemo.zone_id}"
+            "--txt-owner-id=${data.aws_route53_zone.eks_nemo.zone_id}"
           ]
         }
       }

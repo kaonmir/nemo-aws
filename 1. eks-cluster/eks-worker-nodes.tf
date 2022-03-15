@@ -48,7 +48,7 @@ resource "aws_eks_node_group" "nodegroup_business" {
   scaling_config {
     desired_size = var.nodegroup_instance_desired_size
     min_size     = max(var.nodegroup_instance_desired_size - 1, 0)
-    max_size     = var.nodegroup_instance_desired_size + 1
+    max_size     = var.nodegroup_instance_desired_size + 3
   }
 
   depends_on = [
@@ -79,7 +79,7 @@ resource "aws_eks_node_group" "nodegroup_admin" {
   scaling_config {
     desired_size = 2
     min_size     = 1
-    max_size     = 2
+    max_size     = 4
   }
 
   depends_on = [

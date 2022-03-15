@@ -1,3 +1,4 @@
+# https://artifacthub.io/packages/helm/prometheus-community/prometheus
 alertmanager:
   nodeSelector:
     role: nodegroup_admin

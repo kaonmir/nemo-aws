@@ -1,0 +1,13 @@
+# https://artifacthub.io/packages/helm/istio-official/istiod
+global:
+  tracer:
+    zipkin:
+      # Host:Port for reporting trace data in zipkin format. If not specified, will default to
+      # zipkin service (port 9411) in the same namespace as the other istio components.
+      # For Jaeger, put jaeger collector's url
+      address: jaeger-collector.istio-system.svc:9411
+
+meshConfig:
+  prometheus:
+    # Prometheus service name is "metrics" and is in the "telemetry" namespace
+    url: "http://metrics.telemetry:9090/"
