@@ -93,7 +93,7 @@ resource "kubernetes_deployment" "external_dns" {
             "--source=ingress",
             "--source=istio-gateway",
             "--source=istio-virtualservice",
-            "--domain-filter=${var.route_53_domain}", # will make ExternalDNS see only the hosted zones matching provided domain, omit to process all available hosted zones
+            "--domain-filter=${var.route53_domain}", # will make ExternalDNS see only the hosted zones matching provided domain, omit to process all available hosted zones
             "--provider=aws",
             "--policy=upsert-only",   # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
             "--aws-zone-type=public", # only look at public hosted zones (valid values are public, private or no value for both)

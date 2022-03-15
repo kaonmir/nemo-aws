@@ -6,6 +6,6 @@ variable "cluster_name" {
   default = "nemo"
 }
 
-variable "route_53_domain" {
+variable "route53_domain" {
   type = string
 }
