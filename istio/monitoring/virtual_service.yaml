@@ -7,7 +7,7 @@ spec:
   gateways:
     - default/gateway # namespace/gateway
   hosts:
-    - argocd.nemo.kaonmir.xyz
+    - argocd.semo.kaonmir.xyz
   http:
     - route:
         - destination:
@@ -24,7 +24,7 @@ spec:
   gateways:
     - default/gateway # namespace/gateway
   hosts:
-    - kiali.nemo.kaonmir.xyz
+    - kiali.semo.kaonmir.xyz
   http:
     - route:
         - destination:
@@ -41,7 +41,7 @@ spec:
   gateways:
     - default/gateway # namespace/gateway
   hosts:
-    - grafana.nemo.kaonmir.xyz
+    - grafana.semo.kaonmir.xyz
   http:
     - route:
         - destination:

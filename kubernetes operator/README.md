@@ -1,4 +1,5 @@
 What I made
 - [ ] grafana
 - [ ] prometheus
-- [ ] jaeger
+- [x] jaeger
+- [x] kiali

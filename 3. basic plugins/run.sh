@@ -31,6 +31,13 @@ helm install prometheus prometheus/prometheus -n istio-system -f values/promethe
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
 
+# cert-manager
+kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
+helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-manager.yaml --version v1.7.1
+
+
 kubectl label namespace default istio-injection=enabled
 
 # TODO And make multiple gateways for each admin, and business apps
@@ -45,6 +52,12 @@ echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you ch
 KIALI_TOKEN_NAME=$(kubectl get sa kiali -n istio-system -o jsonpath="{.secrets[0].name}")
 KIALI_TOKEN=$(kubectl get secret -n istio-system $KIALI_TOKEN_NAME -o jsonpath="{.data.token}" | base64 -d)
 echo "Kiali is running with token $KIALI_TOKEN"
+
+# Grafana
+GRAFANA_ID=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-user}' | base64 -d)
+GRAFANA_PW=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-password}' | base64 -d)
+echo "ID: $GRAFANA_ID, PW: $GRAFANA_PW"
+
 
 ## Legacy
 # Installl CloudWatch agent and Fluentd. So the logs and metrics are sent to CloudWatch
