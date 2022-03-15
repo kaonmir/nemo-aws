@@ -42,3 +42,4 @@ configs:
     # admin / admin1234
     argocdServerAdminPassword: $2b$10$QkGQL1L00nBebiuIXlCYFOOBUVkTt/Z96.mHLWGAUDvNXsM1AxNbS
     argocdServerAdminPasswordMtime: 2020-07-01T00:00:00Z
+  url: https://argocd.nemo.kaonmir.xyz
