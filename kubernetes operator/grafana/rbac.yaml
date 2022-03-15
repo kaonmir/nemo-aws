@@ -1,46 +1,59 @@
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: aggregate-grafana-admin-edit
-  labels:
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-rules:
-  - apiGroups:
-      - "integreatly.org"
-    resources:
-      - grafanas
-      - grafanas/status
-      - grafanas/finalizers
-      - grafanadashboards
-      - grafanadatasources
-      - grafanadatasources/status
-    verbs:
-      - "get"
-      - "list"
-      - "watch"
-      - "create"
-      - "update"
-      - "patch"
-      - "delete"
-      - "deletecollection"
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: grafana-serviceaccount
-  namespace: observability
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: grafana
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: grafana
-subjects:
-  - kind: ServiceAccount
-    name: grafana-serviceaccount
-    namespace: observability
+# ---
+# kind: ClusterRole
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: aggregate-grafana-admin-edit
+#   labels:
+#     rbac.authorization.k8s.io/aggregate-to-admin: "true"
+#     rbac.authorization.k8s.io/aggregate-to-edit: "true"
+# rules:
+#   - apiGroups:
+#       - "integreatly.org"
+#     resources:
+#       - grafanas
+#       - grafanas/status
+#       - grafanas/finalizers
+#       - grafanadashboards
+#       - grafanadatasources
+#       - grafanadatasources/status
+#     verbs:
+#       - "get"
+#       - "list"
+#       - "watch"
+#       - "create"
+#       - "update"
+#       - "patch"
+#       - "delete"
+#       - "deletecollection"
+# ---
+# apiVersion: v1
+# kind: ServiceAccount
+# metadata:
+#   name: grafana-serviceaccount
+#   namespace: observability
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: grafana
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: grafana
+# subjects:
+#   - kind: ServiceAccount
+#     name: grafana-serviceaccount
+#     namespace: observability
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: grafana
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: grafana
+# subjects:
+#   - kind: ServiceAccount
+#     name: grafana-serviceaccount
+#     namespace: observability

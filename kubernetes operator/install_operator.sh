@@ -3,4 +3,11 @@ curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releas
 
 kubectl apply -f https://operatorhub.io/install/prometheus.yaml
 kubectl apply -f https://operatorhub.io/install/istio.yaml
-helm install grafana-operator bitnami/grafana-operator -n operators
+# kubectl apply -f https://operatorhub.io/install/grafana-operator.yaml
+
+helm install grafana-operator bitnami/grafana-operator -n operators 
+
+
+# Jaeger
+kubectl create namespace observability
+kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.32.0/jaeger-operator.yaml -n observability
