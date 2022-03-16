@@ -48,3 +48,20 @@ spec:
             host: grafana.istio-system.svc.cluster.local
             port:
               number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: jaeger
+  namespace: default
+spec:
+  gateways:
+    - default/gateway # namespace/gateway
+  hosts:
+    - jaeger.semo.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: jaeger-query.istio-system.svc.cluster.local
+            port:
+              number: 16686

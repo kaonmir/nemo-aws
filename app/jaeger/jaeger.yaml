@@ -3,3 +3,6 @@ kind: Jaeger
 metadata:
   name: jaeger
   namespace: istio-system
+spec:
+  agent:
+    strategy: DaemonSet

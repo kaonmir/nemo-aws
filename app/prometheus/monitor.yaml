@@ -1,0 +1,33 @@
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: any-namespace
+#   namespace: observability
+#   labels:
+#     app: monitor
+# spec:
+#   namespaceSelector:
+#     any: true
+#   selector:
+#     matchLabels:
+#       operated-prometheus: "true"
+#   endpoints:
+#     - port: web
+#       interval: 30s
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: PodMonitor
+# metadata:
+#   name: any-namespace
+#   namespace: observability
+#   labels:
+#     app: monitor
+# spec:
+#   selector:
+#     matchLabels:
+#       operated-prometheus: "true"
+#   namespaceSelector:
+#     any: true
+#   podMetricsEndpoints:
+#     - port: web
+#       interval: 30s

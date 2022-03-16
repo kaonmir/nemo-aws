@@ -7,7 +7,6 @@ kubectl apply -f https://operatorhub.io/install/istio.yaml
 
 helm install grafana-operator bitnami/grafana-operator -n operators 
 
-
 # Jaeger
 kubectl create namespace observability
 kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.32.0/jaeger-operator.yaml -n observability
@@ -18,7 +17,6 @@ helm repo add kiali https://kiali.org/helm-charts
 helm install --set cr.create=true \
     --set cr.namespace=istio-system \
     --namespace operators \
-    --create-namespace \
     kiali-operator \
     kiali/kiali-operator
 
