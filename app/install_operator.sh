@@ -2,21 +2,21 @@
 curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.20.0/install.sh | bash -s v0.20.0
 
 kubectl apply -f https://operatorhub.io/install/prometheus.yaml
-kubectl apply -f https://operatorhub.io/install/istio.yaml
+kubectl apply -f https://operatorhub.io/install/istio.yaml -n observability
 # kubectl apply -f https://operatorhub.io/install/grafana-operator.yaml
 
-helm install grafana-operator bitnami/grafana-operator -n operators 
+helm install grafana-operator bitnami/grafana-operator -n observability 
 
 # Jaeger
 kubectl create namespace observability
 kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.32.0/jaeger-operator.yaml -n observability
 
 # Kiali
-kubectl create namespace operators
+kubectl create namespace observability
 helm repo add kiali https://kiali.org/helm-charts
 helm install --set cr.create=true \
     --set cr.namespace=istio-system \
-    --namespace operators \
+    --namespace observability \
     kiali-operator \
     kiali/kiali-operator
 
