@@ -7,9 +7,10 @@ agent:
       operator: "Exists"
       effect: "NoSchedule"
 collector:
-  service:
-    zipkin:
-      port: 9411
+  volumes:
+    - awsElasticBlockStore:
+        volumeID: vol-0d7c17de1177643a8
+  autoscale: true
   nodeSelector:
     role: nodegroup_admin
   tolerations:
@@ -23,11 +24,7 @@ query:
     - key: "TAINED_BY_ADMIN"
       operator: "Exists"
       effect: "NoSchedule"
-
-cassandra:
-  persistence:
-    # To enable persistence, please see the documentation for the Cassandra chart
-    enabled: true
-
-allInOne:
-  enabled: true
+# cassandra:
+#   persistence:
+#     # To enable persistence, please see the documentation for the Cassandra chart
+#     enabled: true

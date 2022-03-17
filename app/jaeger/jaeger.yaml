@@ -1,8 +1,19 @@
+# https://www.jaegertracing.io/docs/1.32/operator/#production-strategy
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
   name: jaeger
   namespace: istio-system
 spec:
+  strategy: production
+  collector:
+    #   maxReplicas: 5
   agent:
     strategy: DaemonSet
+
+    nodeSelector:
+      role: nodegroup_admin
+    tolerations:
+      - key: "TAINED_BY_ADMIN"
+        operator: "Exists"
+        effect: "NoSchedule"
