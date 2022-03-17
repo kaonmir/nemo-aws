@@ -1,14 +1,16 @@
 # Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
 curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.20.0/install.sh | bash -s v0.20.0
 
-# Argocd will be installed by Helm
+# "Argocd" will be installed by Helm
+# "Prometheus" will be installed by Helm
+
 
 kubectl apply -f https://operatorhub.io/install/prometheus.yaml
 # kubectl apply -f https://operatorhub.io/install/grafana-operator.yaml
 
 helm install grafana-operator bitnami/grafana-operator -n observability 
 
-# Create namespace where the operators will be iinstalled
+# Create namespace where the operators will be installed
 kubectl create namespace observability
 
 # Istio

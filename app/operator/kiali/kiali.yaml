@@ -55,13 +55,8 @@ spec:
         use_kiali_token: true
         type: "basic" # none,basic,bearer
         username: "admin"
-        password: "3rE9GdH8fhEy3MicMb9jhbUJmxrTLnZMc4jTIj4U"
+        password: "FKfAQO30q3RlehNk3VLBmi3XzN3cqi2VzKCqITfy"
         token: ""
-      dashboards:
-        - name: "Istio Service Dashboard"
-          variables:
-            namespace: "var-namespace"
-            service: "var-service"
       enabled: true
       health_check_url: ""
       in_cluster_url: "http://grafana.istio-system.svc:80"

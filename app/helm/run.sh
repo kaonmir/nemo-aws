@@ -49,7 +49,7 @@ ARGOCD_PW=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath
 echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you changed"
 
 # Kiali
-KIALI_TOKEN_NAME=$(kubectl get sa kiali -n istio-system -o jsonpath="{.secrets[0].name}")
+KIALI_TOKEN_NAME=$(kubectl get sa kiali-service-account -n istio-system -o jsonpath="{.secrets[0].name}")
 KIALI_TOKEN=$(kubectl get secret -n istio-system $KIALI_TOKEN_NAME -o jsonpath="{.data.token}" | base64 -d)
 echo "Kiali is running with token $KIALI_TOKEN"
 

@@ -28,3 +28,5 @@ spec:
           - key: "TAINED_BY_ADMIN"
             operator: "Exists"
             effect: "NoSchedule"
+    ingressGateways:
+      enabled: false
