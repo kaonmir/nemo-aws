@@ -1,27 +1,14 @@
 # Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
 curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.20.0/install.sh | bash -s v0.20.0
 
-# "Argocd" will be installed by Helm
-# "Prometheus" will be installed by Helm
-
-
-kubectl apply -f https://operatorhub.io/install/prometheus.yaml
-# kubectl apply -f https://operatorhub.io/install/grafana-operator.yaml
-
-helm install grafana-operator bitnami/grafana-operator -n observability 
+# "Argocd", "Prometheus", "Grafana" will be installed by Helm
 
 # Create namespace where the operators will be installed
 kubectl create namespace observability
 
 # Istio
 kubectl create namespace istio-system
-wget https://github.com/istio/istio/releases/download/1.13.2/istio-1.13.2-osx-arm64.tar.gz
-tar -xzf istio-1.13.2-osx-arm64.tar.gz
-helm install istio-operator istio-1.13.2/manifests/charts/istio-operator -n observability \
-  --set operatorNamespace="observability" \
-  --set watchedNamespaces="istio-system"
-
-rm -rf istio-1.13.2-osx-arm64.tar.gz istio-1.13.2
+istioctl operator init
 
 # Jaeger
 kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.32.0/jaeger-operator.yaml -n observability
@@ -38,3 +25,6 @@ bash <(curl -sL https://raw.githubusercontent.com/kiali/kiali-operator/master/cr
   -crd https://raw.githubusercontent.com/kiali/kiali-operator/master/crd-docs/crd/kiali.io_kialis.yaml \
   --kiali-cr-name kiali \
   -n istio-system
+
+# Istio Validator
+istioctl analyze --all-namespace
