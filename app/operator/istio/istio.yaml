@@ -39,5 +39,21 @@ spec:
           hpaSpec:
             minReplicas: 2
             maxReplicas: 6
+          service:
+            type: NodePort # ingress gateway 의 NodePort 사용
           serviceAnnotations:
-            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+            alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
+            alb.ingress.kubernetes.io/healthcheck-port: "30894"
+    pilot:
+      enabled: true
+      k8s:
+        hpaSpec:
+          minReplicas: 2
+        nodeSelector:
+          role: nodegroup_admin
+        tolerations:
+          - key: "TAINED_BY_ADMIN"
+            operator: "Exists"
+            effect: "NoSchedule"
+    meshConfig:
+      enableTracing: true

@@ -1,12 +1,12 @@
 locals {
-  serviceaccount-name      = "cluster-autoscaler"
-  serviceaccount-namespace = "kube-system"
+  serviceaccount_name      = "cluster-autoscaler"
+  serviceaccount_namespace = "kube-system"
 }
 
 resource "kubernetes_service_account" "cluster-autoscaler" {
   metadata {
-    name      = local.serviceaccount-name
-    namespace = local.serviceaccount-namespace
+    name      = local.serviceaccount_name
+    namespace = local.serviceaccount_namespace
     annotations = {
       "eks.amazonaws.com/role-arn" = "${aws_iam_role.k8s-asg-policy.arn}"
     }
@@ -22,8 +22,8 @@ resource "kubernetes_service_account" "cluster-autoscaler" {
 
 resource "kubernetes_secret" "cluster-autoscaler" {
   metadata {
-    name      = "cluster-autoscaler"
-    namespace = "kube-system"
+    name      = local.serviceaccount_name
+    namespace = local.serviceaccount_namespace
   }
 
 }

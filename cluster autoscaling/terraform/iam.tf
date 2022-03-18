@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:${local.serviceaccount-namespace}:${local.serviceaccount-name}"]
+      values   = ["system:serviceaccount:${local.serviceaccount_namespace}:${local.serviceaccount_name}"]
     }
     condition {
       test     = "StringEquals"

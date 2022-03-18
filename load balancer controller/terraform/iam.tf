@@ -1,7 +1,3 @@
-locals {
-  service_account = "aws-load-balancer-controller"
-}
-
 data "aws_eks_cluster" "nemo_eks_cluster" {
   name = var.cluster_name
 }
@@ -16,7 +12,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(data.aws_iam_openid_connect_provider.oidc.url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:kube-system:${local.service_account}"]
+      values   = ["system:serviceaccount:${local.serviceaccount_namespace}:${local.serviceaccount_name}"]
     }
     condition {
       test     = "StringEquals"
