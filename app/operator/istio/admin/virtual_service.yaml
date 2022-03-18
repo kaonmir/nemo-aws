@@ -5,9 +5,9 @@ metadata:
   namespace: default
 spec:
   gateways:
-    - default/gateway # namespace/gateway
+    - default/gateway-admin
   hosts:
-    - argocd.semo.kaonmir.xyz
+    - argocd.admin.kaonmir.xyz
   http:
     - route:
         - destination:
@@ -22,9 +22,9 @@ metadata:
   namespace: default
 spec:
   gateways:
-    - default/gateway # namespace/gateway
+    - default/gateway-admin # namespace/gateway
   hosts:
-    - kiali.semo.kaonmir.xyz
+    - kiali.admin.kaonmir.xyz
   http:
     - route:
         - destination:
@@ -39,9 +39,9 @@ metadata:
   namespace: default
 spec:
   gateways:
-    - default/gateway # namespace/gateway
+    - default/gateway-admin # namespace/gateway
   hosts:
-    - grafana.semo.kaonmir.xyz
+    - grafana.admin.kaonmir.xyz
   http:
     - route:
         - destination:
@@ -56,9 +56,9 @@ metadata:
   namespace: default
 spec:
   gateways:
-    - default/gateway # namespace/gateway
+    - default/gateway-admin # namespace/gateway
   hosts:
-    - jaeger.semo.kaonmir.xyz
+    - jaeger.admin.kaonmir.xyz
   http:
     - route:
         - destination:

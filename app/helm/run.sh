@@ -42,9 +42,11 @@ kubectl label namespace default istio-injection=enabled
 
 # TODO And make multiple gateways for each admin, and business apps
 
+# IStio
 ISTIO_HOSTNAME=$(kubectl get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 echo "Istio ingress is running on host \"$ISTIO_HOSTNAME\""
 
+# Argocd
 ARGOCD_PW=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
 echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you changed"
 

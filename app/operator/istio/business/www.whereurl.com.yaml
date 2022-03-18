@@ -5,9 +5,10 @@ metadata:
   namespace: default
 spec:
   gateways:
-    - default/business-gateway # namespace/gateway
+    - default/gateway-business
   hosts:
-    - boutique.nemo.kaonmir.xyz
+    - www.whereurl.com
+    - whereurl.com
   http:
     - route:
         - destination:

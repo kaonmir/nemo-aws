@@ -3,3 +3,7 @@ test.sh
 .terraform*
 terraform.tfstate
 *.backup
+*.pem
+*.crt
+*.key
+*.secret.yaml
