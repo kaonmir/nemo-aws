@@ -9,6 +9,7 @@ spec:
   servers:
     - hosts:
         - www.whereurl.com
+        - whereurl.com
       port:
         name: http
         number: 80
@@ -16,7 +17,7 @@ spec:
       tls:
         httpsRedirect: false
     - hosts:
-        - "*.whereurl.com"
+        - "www.whereurl.com"
         - "whereurl.com"
       port:
         name: https

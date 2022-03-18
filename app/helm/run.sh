@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Calico
-helm repo add projectcalico https://docs.projectcalico.org/charts
-helm install calico projectcalico/tigera-operator --version v3.21.4
-
 # Istiod
 kubectl create namespace istio-system
 helm repo add istio https://istio-release.storage.googleapis.com/charts
@@ -23,7 +19,6 @@ helm install kiali kiali/kiali-server -n istio-system -f values/kiali.yaml
 # Jaeger
 helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
-
 
 # Prometheus & Grafana
 helm repo add prometheus https://prometheus-community.github.io/helm-charts

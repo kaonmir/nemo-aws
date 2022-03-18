@@ -6,6 +6,10 @@ curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releas
 # Create namespace where the operators will be installed
 kubectl create namespace observability
 
+# Calico
+helm repo add projectcalico https://docs.projectcalico.org/charts
+helm install calico projectcalico/tigera-operator --version v3.21.4
+
 # Istio
 kubectl create namespace istio-system
 istioctl operator init
@@ -19,7 +23,6 @@ helm install kiali-operator kiali/kiali-operator -n observability
   --set cr.create="true" \
   --set cr.namespace="istio-system"
     
-
 # Kiali validator
 bash <(curl -sL https://raw.githubusercontent.com/kiali/kiali-operator/master/crd-docs/bin/validate-kiali-cr.sh) \
   -crd https://raw.githubusercontent.com/kiali/kiali-operator/master/crd-docs/crd/kiali.io_kialis.yaml \

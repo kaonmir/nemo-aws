@@ -10,7 +10,7 @@ But the problem is it is yet deployed well. Especially Prometheus and Grafana.
 Prometheus operator documentation sucks.
 
 What I made
-- [ ] grafana
-- [ ] prometheus
-- [x] jaeger
-- [x] kiali
+- istio
+- jaeger
+- kiali
+- calico
