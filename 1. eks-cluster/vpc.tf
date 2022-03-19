@@ -39,6 +39,7 @@ resource "aws_subnet" "nemo_eks_public_subnet" {
   tags = {
     "Name"                                      = "nemo_eks_public_${local.alphabets[count.index]}"
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"           = 1
   }
 }
 
@@ -53,6 +54,7 @@ resource "aws_subnet" "nemo_eks_private_subnet" {
   tags = {
     "Name"                                      = "nemo_eks_private_${local.alphabets[count.index]}"
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                    = 1
   }
 }
 
