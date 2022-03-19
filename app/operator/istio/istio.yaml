@@ -5,7 +5,7 @@ metadata:
   namespace: istio-system
   name: istiocontrolplane
 spec:
-  profile: minimal
+  profile: empty
   namespace: istio-system
   components:
     ingressGateways:
@@ -20,9 +20,9 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
-          hpaSpec:
-            minReplicas: 1
-            maxReplicas: 3
+          # hpaSpec:
+          #   minReplicas: 1
+          #   maxReplicas: 3
           serviceAnnotations:
             service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
       - enabled: true
@@ -36,24 +36,21 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
-          hpaSpec:
-            minReplicas: 2
-            maxReplicas: 6
-          service:
-            type: NodePort # ingress gateway 의 NodePort 사용
+          # hpaSpec:
+          #   minReplicas: 2
+          #   maxReplicas: 6
           serviceAnnotations:
             alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
-            alb.ingress.kubernetes.io/healthcheck-port: "30894"
-    pilot:
+            alb.ingress.kubernetes.io/healthcheck-port: "30101"
+    pilot: # = Istiod
       enabled: true
       k8s:
         hpaSpec:
-          minReplicas: 2
+          minReplicas: 1
+          maxReplicas: 4
         nodeSelector:
           role: nodegroup_admin
         tolerations:
           - key: "TAINED_BY_ADMIN"
             operator: "Exists"
             effect: "NoSchedule"
-    meshConfig:
-      enableTracing: true

@@ -32,6 +32,9 @@ helm repo add jetstack https://charts.jetstack.io
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
 helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-manager.yaml --version v1.7.1
 
+# metric-server (for HPA, VPA and "kubectl top")
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
 
 kubectl label namespace default istio-injection=enabled
 
