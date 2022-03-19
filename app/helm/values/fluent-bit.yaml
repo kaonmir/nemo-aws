@@ -1,0 +1,13 @@
+rbac:
+  create: true
+  # nodeAccess: false
+
+nodeSelector:
+  role: nodegroup_admin
+tolerations:
+  - key: "TAINED_BY_ADMIN"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+loki:
+  serviceName: loki.svc.cluster.local

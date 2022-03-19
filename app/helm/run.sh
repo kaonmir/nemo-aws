@@ -1,30 +1,6 @@
 #!/bin/bash
 
-# Istiod
-kubectl create namespace istio-system
-helm repo add istio https://istio-release.storage.googleapis.com/charts
-helm install base istio/base -n istio-system
-helm install istiod istio/istiod -n istio-system -f values/istiod.yaml
-helm install istio-gateway istio/gateway -n istio-system -f values/istio-gateway.yaml
-
-# Argocd 
-kubectl create namespace argocd
-helm repo add argocd https://argoproj.github.io/argo-helm
-helm install argocd argocd/argo-cd -n argocd -f values/argocd.yaml
-
-# Kiali
-helm repo add kiali https://kiali.org/helm-charts
-helm install kiali kiali/kiali-server -n istio-system -f values/kiali.yaml
-
-# Jaeger
-helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
-helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
-
-# Prometheus & Grafana
-helm repo add prometheus https://prometheus-community.github.io/helm-charts
-helm install prometheus prometheus/prometheus -n istio-system -f values/prometheus.yaml
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
+# TODO: admin node에서 daemonset 빼기
 
 # cert-manager
 kubectl create namespace cert-manager
@@ -35,12 +11,27 @@ helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-m
 # metric-server (for HPA, VPA and "kubectl top")
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
+# Argocd 
+kubectl create namespace argocd
+helm repo add argocd https://argoproj.github.io/argo-helm
+helm install argocd argocd/argo-cd -n argocd -f values/argocd.yaml
 
-kubectl label namespace default istio-injection=enabled
+# Prometheus
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus/prometheus -n istio-system -f values/prometheus.yaml
 
-# TODO And make multiple gateways for each admin, and business apps
+# Grafana & Grafana Loki
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
+helm install loki grafana/loki -n istio-system -f values/loki.yaml
 
-# IStio
+# Fluent Bit
+helm repo add fluent https://fluent.github.io/helm-charts
+helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
+
+
+## Extracing crucial data
+# Istio
 ISTIO_HOSTNAME=$(kubectl get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 echo "Istio ingress is running on host \"$ISTIO_HOSTNAME\""
 
@@ -60,6 +51,7 @@ echo "ID: $GRAFANA_ID, PW: $GRAFANA_PW"
 
 
 ## Legacy
+
 # Installl CloudWatch agent and Fluentd. So the logs and metrics are sent to CloudWatch
 # FluentBitHttpPort='2020'
 # FluentBitReadFromHead='Off'
@@ -67,3 +59,18 @@ echo "ID: $GRAFANA_ID, PW: $GRAFANA_PW"
 # [[ -z ${FluentBitHttpPort} ]] && FluentBitHttpServer='Off' || FluentBitHttpServer='On'
 # curl https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/quickstart/cwagent-fluent-bit-quickstart.yaml | sed 's/{{cluster_name}}/'${CLUSTER_NAME}'/;s/{{region_name}}/'${REGION_NAME}'/;s/{{http_server_toggle}}/"'${FluentBitHttpServer}'"/;s/{{http_server_port}}/"'${FluentBitHttpPort}'"/;s/{{read_from_head}}/"'${FluentBitReadFromHead}'"/;s/{{read_from_tail}}/"'${FluentBitReadFromTail}'"/' | kubectl apply -f -
 # aws iam attach-role-policy --role-name nemo_eks_node --policy-arn arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+
+# Kiali
+# helm repo add kiali https://kiali.org/helm-charts
+# helm install kiali kiali/kiali-server -n istio-system -f values/kiali.yaml
+
+# Jaeger
+# helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+# helm install jaeger jaegertracing/jaeger -n istio-system -f values/jaeger.yaml
+
+# Istiod
+# kubectl create namespace istio-system
+# helm repo add istio https://istio-release.storage.googleapis.com/charts
+# helm install base istio/base -n istio-system
+# helm install istiod istio/istiod -n istio-system -f values/istiod.yaml
+# helm install istio-gateway istio/gateway -n istio-system -f values/istio-gateway.yaml
