@@ -20,11 +20,12 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
-          # hpaSpec:
-          #   minReplicas: 1
-          #   maxReplicas: 3
+          hpaSpec:
+            minReplicas: 1
+            maxReplicas: 3
           serviceAnnotations:
             service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+
       - enabled: true
         name: istio-ingressgateway-business
         label:
@@ -36,9 +37,11 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
-          # hpaSpec:
-          #   minReplicas: 2
-          #   maxReplicas: 6
+          service:
+            type: NodePort # ingress gateway 의 NodePort 사용
+          hpaSpec:
+            minReplicas: 2
+            maxReplicas: 6
           serviceAnnotations:
             alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
             alb.ingress.kubernetes.io/healthcheck-port: "30101"

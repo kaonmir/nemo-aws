@@ -21,5 +21,4 @@ resource "kubernetes_secret" "sa_secret" {
     name      = local.serviceaccount_name
     namespace = local.serviceaccount_namespace
   }
-
 }
