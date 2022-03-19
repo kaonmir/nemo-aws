@@ -2,12 +2,27 @@ rbac:
   create: true
   # nodeAccess: false
 
-nodeSelector:
-  role: nodegroup_admin
 tolerations:
   - key: "TAINED_BY_ADMIN"
     operator: "Exists"
     effect: "NoSchedule"
 
-loki:
-  serviceName: loki.svc.cluster.local
+## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
+config:
+  # inputs: | # https://docs.fluentbit.io/manual/pipeline/inputs
+  # filters: | # https://docs.fluentbit.io/manual/pipeline/filters
+
+  outputs: | # https://docs.fluentbit.io/manual/pipeline/outputs
+    [Output]
+        Name grafana-loki
+        Match *
+        Url http://loki:3100/api/prom/push
+        TenantID ""
+        BatchWait 1
+        BatchSize 1048576
+        Labels {job="fluent-bit"}
+        RemoveKeys kubernetes,stream
+        AutoKubernetesLabels false
+        LabelMapPath /fluent-bit/etc/labelmap.json
+        LineFormat json
+        LogLevel warn

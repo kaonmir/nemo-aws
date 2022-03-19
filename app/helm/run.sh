@@ -23,11 +23,15 @@ helm install prometheus prometheus/prometheus -n istio-system -f values/promethe
 # Grafana & Grafana Loki
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
-helm install loki grafana/loki -n istio-system -f values/loki.yaml
+# helm install loki grafana/loki -n istio-system -f values/loki.yaml
 
 # Fluent Bit
-helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
+# helm repo add fluent https://fluent.github.io/helm-charts
+# helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
+
+# Grafana Loki stack
+helm install loki grafana/loki-stack -n istio-system \
+    --set fluent-bit.enabled=true,promtail.enabled=false
 
 
 ## Extracing crucial data
