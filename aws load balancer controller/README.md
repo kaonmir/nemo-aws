@@ -1,5 +1,3 @@
-[reference](https://velog.io/@airoasis/EKS-%EC%97%90%EC%84%9C-Istio-%EC%99%80-ALB-%EC%97%B0%EA%B2%B0)
-
 EKS에서 ALB를 사용하는 법을 적는다.
 
 EKS에서 service에 Load balancer 타입을 적용하면 AWS ELB가 생성되는데, 이게 Class Load Balancer로 생성된다.
@@ -21,3 +19,7 @@ AWS의 시작과 함께 있었던 CLB인 만큼 왠지 쓰기 찝찝하다. 수 
 전자는 확실히 아니고 (terraform으로 생성된 거 몇 번이나 확인함), 나는 후자가 분명하다. Private subnet에는 `kubernetes.io/role/internal-elb: 1`, public subnet에는 `kubernetes.io/role/elb: 1`을 붙여주면 된다. 적용하고 pod 한 번 지우니까 잘 된다!
 
 이 태그는 폴더 내에서는 적용이 불가능하고 그냥 `1. eks-cluster` 폴더의 terraform에 박아버릴 것이다. 나중에 ALB를 적용할 때에는 자동으로 적용되어 있으니 신경 쓸 필요가 없을 거다.
+
+### Reference
+
+[reference](https://velog.io/@airoasis/EKS-%EC%97%90%EC%84%9C-Istio-%EC%99%80-ALB-%EC%97%B0%EA%B2%B0), 좋은 레퍼런스긴 한데 Ingress가 옛날 거라서 바꿔줘야 한다.
