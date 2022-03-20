@@ -1,16 +1,23 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: boutique
+  name: boutique-test
   namespace: default
 spec:
   gateways:
     - default/gateway-business
   hosts:
-    - boutique.business.kaonmir.xyz
-    - whereurl.com
-  http:
-    - route:
+    - "boutique.business.kaonmir.xyz"
+  # http:
+  #   - route:
+  #       - destination:
+  #           host: frontend.default.svc.cluster.local
+  #           port:
+  #             number: 80
+  tls:
+    - match:
+        - port: 443
+      route:
         - destination:
             host: frontend.default.svc.cluster.local
             port:

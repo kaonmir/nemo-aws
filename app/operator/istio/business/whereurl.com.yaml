@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: whereurl.com
+  namespace: default
+spec:
+  gateways:
+    - default/gateway-business
+  hosts:
+    - whereurl.com
+    - www.whereurl.com
+  http:
+    - route:
+        - destination:
+            host: frontend.default.svc.cluster.local
+            port:
+              number: 80
