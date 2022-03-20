@@ -25,7 +25,6 @@ spec:
             maxReplicas: 3
           serviceAnnotations:
             service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-            service.beta.kubernetes.io/aws-load-balancer-name: "isito-nlb-admin"
 
       - enabled: true
         name: istio-ingressgateway-business
@@ -38,14 +37,11 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
-          service:
-            type: NodePort # ingress gateway 의 NodePort 사용
+          serviceAnnotations:
+            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
           hpaSpec:
             minReplicas: 1
             maxReplicas: 6
-          serviceAnnotations:
-            alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
-            alb.ingress.kubernetes.io/healthcheck-port: "32727"
     pilot: # = Istiod
       enabled: true
       k8s:

@@ -7,7 +7,7 @@ spec:
   gateways:
     - default/gateway-business
   hosts:
-    - www.whereurl.com
+    - boutique.business.kaonmir.xyz
     - whereurl.com
   http:
     - route:

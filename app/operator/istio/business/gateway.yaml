@@ -8,22 +8,21 @@ spec:
     role: business
   servers:
     - hosts:
-        - www.whereurl.com
-        - whereurl.com
+        - "*.business.kaonmir.xyz"
+        - "whereurl.com"
       port:
         name: http
         number: 80
         protocol: HTTP
-      tls:
-        httpsRedirect: false
-    - hosts:
-        - "www.whereurl.com"
-        - "whereurl.com"
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        mode: SIMPLE
-        credentialName: default/whereurl.com
-        # mode: PASSTHROUGH
+    #   tls:
+    #     httpsRedirect: false
+    # - hosts:
+    #     - "www.whereurl.com"
+    #     - "whereurl.com"
+    #     - test.business.kaonmir.xyz
+    #   port:
+    #     name: https
+    #     number: 443
+    #     protocol: HTTPS
+    #   tls:
+    #     mode: PASSTHROUGH
