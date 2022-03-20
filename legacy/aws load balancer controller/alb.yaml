@@ -5,28 +5,21 @@ metadata:
   namespace: istio-system
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:774026503161:certificate/ff58e379-051b-4876-9fa4-a08d29dcadbc
-    alb.ingress.kubernetes.io/backend-protocol: HTTPS
-    alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
-    alb.ingress.kubernetes.io/healthcheck-port: "32727"
-    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301" }}'
+
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/ff58e379-051b-4876-9fa4-a08d29dcadbc
+    # alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz/ready
+    alb.ingress.kubernetes.io/healthcheck-port: "32398"
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+
+    # alb.ingress.kubernetes.io/backend-protocol: HTTPS
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                # name: ssl-redirect
-                # port:
-                #   name: use-annotation
-                name: istio-ingressgateway-business
-                port:
-                  number: 80
           - path: /healthz/ready
             pathType: Prefix
             backend:
@@ -34,6 +27,17 @@ spec:
                 name: istio-ingressgateway-business
                 port:
                   number: 15021
+          - path: /
+            pathType: Prefix
+            backend:
+              # service:
+              #   name: ssl-redirect
+              #   port:
+              #     name: use-annotation
+              service:
+                name: istio-ingressgateway-business
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:

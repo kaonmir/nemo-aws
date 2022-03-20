@@ -37,6 +37,10 @@ spec:
             - key: "TAINED_BY_ADMIN"
               operator: "Exists"
               effect: "NoSchedule"
+          # service:
+          #   type: NodePort
+          #   ports:
+          #     - nodePort: 32398
           serviceAnnotations:
             # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
             service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/ff58e379-051b-4876-9fa4-a08d29dcadbc

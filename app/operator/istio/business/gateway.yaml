@@ -8,21 +8,22 @@ spec:
     role: business
   servers:
     - hosts:
-        - "www.whereurl.com"
-        - "whereurl.com"
+        - www.whereurl.com
+        - whereurl.com
       port:
         name: http
         number: 80
         protocol: HTTP
 
     - hosts:
-        - "boutique.business.kaonmir.xyz"
+        - boutique.business.kaonmir.xyz
       port:
         name: http
         number: 80
         protocol: HTTP
       tls:
-        httpsRedirect: true
+        # httpsRedirect: true
+        httpsRedirect: false
     - hosts:
         - "boutique.business.kaonmir.xyz"
       port:

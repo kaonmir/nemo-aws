@@ -1,13 +1,13 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: boutique-test
+  name: boutique
   namespace: default
 spec:
   gateways:
     - default/gateway-business
   hosts:
-    - "boutique.business.kaonmir.xyz"
+    - boutique.business.kaonmir.xyz
   # http:
   #   - route:
   #       - destination:
