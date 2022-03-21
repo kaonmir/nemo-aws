@@ -15,3 +15,11 @@ spec:
             host: frontend.default.svc.cluster.local
             port:
               number: 80
+  tls:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            host: frontend.default.svc.cluster.local
+            port:
+              number: 80

@@ -14,7 +14,19 @@ spec:
         name: http
         number: 80
         protocol: HTTP
+      tls:
+        httpsRedirect: true
+    - hosts:
+        - www.whereurl.com
+        - whereurl.com
+      port:
+        name: http
+        number: 443
+        protocol: HTTP
+      tls:
+        mode: PASSTHROUGH
 
+    # ---
     - hosts:
         - boutique.business.kaonmir.xyz
       port:
