@@ -31,5 +31,6 @@ bash <(curl -sL https://raw.githubusercontent.com/kiali/kiali-operator/master/cr
   --kiali-cr-name kiali \
   -n istio-system
 
+
 # Istio Validator
 istioctl analyze --all-namespaces
