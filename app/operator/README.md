@@ -13,4 +13,4 @@ What I made
 - istio
 - jaeger
 - kiali
-- calic
+- calico
