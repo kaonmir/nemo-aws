@@ -1,17 +1,17 @@
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: whereurl.com
-  namespace: default
-spec:
-  gateways:
-    - default/gateway-business
-  hosts:
-    - whereurl.com
-    - www.whereurl.com
-  http:
-    - route:
-        - destination:
-            host: nemo-smart.default.svc.cluster.local
-            port:
-              number: 80
+# apiVersion: networking.istio.io/v1beta1
+# kind: VirtualService
+# metadata:
+#   name: whereurl.com
+#   namespace: default
+# spec:
+#   gateways:
+#     - default/gateway-business
+#   hosts:
+#     - whereurl.com
+#     - www.whereurl.com
+#   http:
+#     - route:
+#         - destination:
+#             host: nemo-smart.default.svc.cluster.local
+#             port:
+#               number: 80

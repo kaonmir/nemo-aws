@@ -1,0 +1,49 @@
+# Default values for jaeger-operator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+name: nemo-smart
+namespace: default
+
+replicas: 1
+
+image:
+  repository: 774026503161.dkr.ecr.ap-northeast-2.amazonaws.com/nemo-smart-dev
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080 # Port of actual application
+  annotations: {} # Specifies extra environment variables passed to the operator:
+
+# ----- 여기까지는 모두 사용함
+
+extraEnv:
+  []
+  # Specifies log-level for the operator:
+  # - name: LOG-LEVEL
+  #   value: debug
+
+extraLabels:
+  {}
+  # Specifies extra labels for the operator deployment:
+  # foo: bar
+
+resources:
+  {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+securityContext: {}
+
+priorityClassName:

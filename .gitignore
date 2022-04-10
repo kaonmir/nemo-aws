@@ -8,4 +8,5 @@ terraform.tfstate
 *.key
 *.secret.yaml
 *.jar
+*.tgz
 app
