@@ -7,3 +7,5 @@ terraform.tfstate
 *.crt
 *.key
 *.secret.yaml
+*.jar
+app

@@ -12,6 +12,6 @@ spec:
   http:
     - route:
         - destination:
-            host: frontend.default.svc.cluster.local
+            host: nemo-smart.default.svc.cluster.local
             port:
               number: 80
