@@ -1,6 +1,7 @@
 apiVersion: v2
 name: nemo-smart
 description: Smart Shinan villege by Nemo Corps.
+icon: https://www.whereurl.com/favicon.ico
 
 type: application
 version: 0.1.0

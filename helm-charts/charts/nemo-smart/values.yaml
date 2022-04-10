@@ -16,6 +16,10 @@ service:
   port: 8080 # Port of actual application
   annotations: {} # Specifies extra environment variables passed to the operator:
 
+hosts:
+  - www.whereurl.com
+  - whereurl.com
+
 # ----- 여기까지는 모두 사용함
 
 extraEnv:
