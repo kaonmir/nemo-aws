@@ -20,4 +20,3 @@ variable "nodegroup_instance_desired_size" {
   type    = number
   default = 2
 }
-
