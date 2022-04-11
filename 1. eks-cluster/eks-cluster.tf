@@ -22,6 +22,7 @@ resource "aws_iam_role_policy_attachment" "nemo_eks_cluster_AmazonEKSClusterPoli
   role       = aws_iam_role.nemo_eks_cluster.name
 }
 
+
 resource "aws_iam_role_policy_attachment" "nemo_eks_cluster_AmazonEKSVPCResourceController" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   role       = aws_iam_role.nemo_eks_cluster.name
