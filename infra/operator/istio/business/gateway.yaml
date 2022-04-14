@@ -20,7 +20,7 @@ spec:
         - www.whereurl.com
         - whereurl.com
       port:
-        name: http
+        name: https
         number: 443
         protocol: HTTP
       tls:
