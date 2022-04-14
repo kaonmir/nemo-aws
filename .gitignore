@@ -9,3 +9,7 @@ terraform.tfstate
 *.secret.yaml
 *.jar
 *.tgz
+*.zip
+*.tar
+*.gz
+.DS_Store

@@ -14,6 +14,10 @@ spec:
             host: "argocd-server.argocd.svc.cluster.local"
             port:
               number: 80
+        - destination:
+            host: "argocd-server.argocd.svc.cluster.local"
+            port:
+              number: 443
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
