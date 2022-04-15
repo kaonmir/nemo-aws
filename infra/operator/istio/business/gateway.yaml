@@ -22,6 +22,6 @@ spec:
       port:
         name: https
         number: 443
-        protocol: HTTPS
+        protocol: HTTP # HTTPS 했더니 오류남
       tls:
         mode: PASSTHROUGH
