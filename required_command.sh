@@ -5,7 +5,7 @@ brew update
 
 brew install kubectl 
 brew install jq
-brew install argocd
+brew install argocd 
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 
