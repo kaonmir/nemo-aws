@@ -9,7 +9,7 @@ brew install argocd
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 
-# install istioctl
+# install istioctln
 curl -sL https://istio.io/downloadIstioctl | sh -
 cp $HOME/.istioctl/bin/istioctl /usr/local/bin/istioctl
 rm -rf $HOME/.istioctl
