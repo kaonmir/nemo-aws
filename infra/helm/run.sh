@@ -10,7 +10,7 @@ helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-m
 
 # metric-server (for HPA, VPA and "kubectl top")
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
- 
+  
 # Argocd 
 kubectl create namespace argocd
 helm repo add argocd https://argoproj.github.io/argo-helm
