@@ -86,7 +86,7 @@ resource "aws_eks_node_group" "nodegroup_admin" {
     aws_iam_role_policy_attachment.nemo_eks_node_AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.nemo_eks_node_AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.nemo_eks_node_AmazonEC2ContainerRegistryReadOnly,
-  ]
+  ] 
 
   tags = {
     "Name" = "${aws_eks_cluster.nemo_eks_cluster.name}_nemo_eks_node"
