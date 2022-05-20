@@ -10,7 +10,7 @@ resource "aws_vpc" "nemo_eks_vpc" {
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
-
+ 
 resource "aws_eip" "nemo_eks_eip" {
   vpc = true
   tags = {
