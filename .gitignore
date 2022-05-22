@@ -11,6 +11,6 @@ terraform.tfstate
 *.tgz
 *.zip
 *.tar
-*.gz
+*.gz 
 *.ts
 .DS_Store
