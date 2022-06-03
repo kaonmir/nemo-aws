@@ -1,0 +1,16 @@
+trust.json
+test.sh
+.terraform*
+terraform.tfstate
+*.backup
+*.pem
+*.crt
+*.key
+*.secret.yaml
+*.jar
+*.tgz
+*.zip
+*.tar
+*.gz 
+*.ts
+.DS_Store
