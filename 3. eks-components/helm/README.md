@@ -22,5 +22,3 @@ New argocd admin account is defined by default. ID is `admin` and PW is shown by
 If you want to change admin password as default, use this command
 
 By the way, in this example I set it to **"admin1234"** as a defualt
-
-### CloudWatch Agent
