@@ -130,5 +130,6 @@ resource "local_file" "kube_config" {
       }
     ]
   }), "/((?:^|\n)[\\s-]*)\"([\\w-]+)\":/", "$1$2:")
-  filename = pathexpand("~/.kube/config")
+  filename        = pathexpand("~/.kube/config")
+  file_permission = "0700"
 }

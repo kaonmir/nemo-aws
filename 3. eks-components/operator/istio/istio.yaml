@@ -10,6 +10,10 @@ spec:
   components:
     ingressGateways:
       - enabled: true
+        name: ingressgateway
+        label:
+          role: ingressgateway
+      - enabled: true
         name: istio-ingressgateway-admin
         label:
           role: admin
@@ -24,11 +28,11 @@ spec:
             minReplicas: 1
             maxReplicas: 3
           serviceAnnotations:
-            # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-            service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/0dd98ec7-efc6-42f5-9ae2-635e9e91654a
-            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
-            service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
-            service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+            # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/0dd98ec7-efc6-42f5-9ae2-635e9e91654a
+            # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+            # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+            # service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
 
       - enabled: true
         name: istio-ingressgateway-business
@@ -46,11 +50,11 @@ spec:
           #   ports:
           #     - nodePort: 32398
           serviceAnnotations:
-            # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-            service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/af201191-3f7c-4cdd-88c7-f7a679db88f7
-            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
-            service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
-            service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+            # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-northeast-2:774026503161:certificate/af201191-3f7c-4cdd-88c7-f7a679db88f7
+            # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+            # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+            # service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
           hpaSpec:
             minReplicas: 2
             maxReplicas: 6

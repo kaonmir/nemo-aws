@@ -4,8 +4,7 @@ locals {
 }
 
 module "vpc" {
-  source           = "terraform-aws-modules/vpc/aws"
-  default_vpc_name = var.project_name
+  source = "terraform-aws-modules/vpc/aws"
 
   # TODO: CIDR도 var로 유동적으로 관리 vpc: /16, subnet: /24
   cidr = "10.0.0.0/16"
@@ -18,6 +17,7 @@ module "vpc" {
   create_vpc         = true
 
   tags = {
+    Name        = var.project_name
     Terraform   = "true"
     Environment = "dev"
   }

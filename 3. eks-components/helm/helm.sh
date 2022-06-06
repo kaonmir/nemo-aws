@@ -26,8 +26,8 @@ helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
 # helm install loki grafana/loki -n istio-system -f values/loki.yaml
 
 # Fluent Bit
-# helm repo add fluent https://fluent.github.io/helm-charts
-# helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
+helm repo add fluent https://fluent.github.io/helm-charts
+helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
 
 # Grafana Loki stack
 helm install loki grafana/loki-stack -n istio-system \

@@ -23,7 +23,6 @@ helm install kiali-operator kiali/kiali-operator -n observability
   --set cr.create="true" \
   --set cr.namespace="istio-system"
     
-
     
 # Kiali validator
 bash <(curl -sL https://raw.githubusercontent.com/kiali/kiali-operator/master/crd-docs/bin/validate-kiali-cr.sh) \

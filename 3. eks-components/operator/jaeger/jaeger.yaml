@@ -10,7 +10,6 @@ spec:
     #   maxReplicas: 5
   agent:
     strategy: DaemonSet
-
     nodeSelector:
       role: nodegroup_admin
     tolerations:

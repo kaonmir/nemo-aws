@@ -7,7 +7,7 @@ For examlpe, when it comes to Grafana,
 it is possible to make Dashboard, Datasource as a code.
 
 But the problem is it is yet deployed well. Especially Prometheus and Grafana.
-Prometheus operator  documentation sucks.
+Prometheus operator documentation sucks.
 
 What I made
 - istio

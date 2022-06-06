@@ -1,6 +1,6 @@
 # Cluster Autoscaler Autodiscover
 # https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
----
+
 # Service Account "cluster-autoscaler" is created by Terraform
 ---
 apiVersion: rbac.authorization.k8s.io/v1

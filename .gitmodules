@@ -1,0 +1,3 @@
+[submodule "keep/app/helm-charts"]
+	path = keep/app/helm-charts
+	url = https://github.com/kaonmir/nemo-helm-charts
