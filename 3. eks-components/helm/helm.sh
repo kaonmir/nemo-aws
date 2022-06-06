@@ -2,8 +2,11 @@
 
 # TODO: admin node에서 daemonset 빼기
 
-# cert-manager
+# namespaces
+kubectl create namespace istio-system
 kubectl create namespace cert-manager
+
+# cert-manager
 helm repo add jetstack https://charts.jetstack.io
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
 helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-manager.yaml --version v1.7.1
@@ -29,24 +32,13 @@ helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
 helm repo add fluent https://fluent.github.io/helm-charts
 helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
 
-# Grafana Loki stack
-helm install loki grafana/loki-stack -n istio-system \
-    --set fluent-bit.enabled=true,promtail.enabled=false
 
-
-## Extracing crucial data
-# Istio
-ISTIO_HOSTNAME=$(kubectl get svc -n istio-system istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-echo "Istio ingress is running on host \"$ISTIO_HOSTNAME\""
+#- Extracing crucial data -#
 
 # Argocd
+# 지금은 defulat 값이 ID: admin, PW: admin1234 이다.
 ARGOCD_PW=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
 echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you changed"
-
-# Kiali
-KIALI_TOKEN_NAME=$(kubectl get sa kiali-service-account -n istio-system -o jsonpath="{.secrets[0].name}")
-KIALI_TOKEN=$(kubectl get secret -n istio-system $KIALI_TOKEN_NAME -o jsonpath="{.data.token}" | base64 -d)
-echo "Kiali is running with token $KIALI_TOKEN"
 
 # Grafana
 GRAFANA_ID=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-user}' | base64 -d)

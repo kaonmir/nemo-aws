@@ -14,13 +14,14 @@ spec:
         number: 80
         protocol: HTTP
       tls:
-        httpsRedirect: true
+        httpsRedirect: false
+        # httpsRedirect: true
 
-    - hosts:
-        - "*.admin.kaonmir.xyz"
-      port:
-        name: https
-        number: 443
-        protocol: HTTP
-      tls:
-        mode: PASSTHROUGH
+    # - hosts:
+    #     - "*.admin.kaonmir.xyz"
+    #   port:
+    #     name: https
+    #     number: 443
+    #     protocol: HTTP
+    #   tls:
+    #     mode: PASSTHROUGH
