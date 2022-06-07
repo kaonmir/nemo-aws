@@ -46,7 +46,7 @@ GRAFANA_ID=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-user
 GRAFANA_PW=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-password}' | base64 -d)
 echo "ID: $GRAFANA_ID, PW: $GRAFANA_PW"
 
-
+ 
 ## Legacy
 
 # Installl CloudWatch agent and Fluentd. So the logs and metrics are sent to CloudWatch
