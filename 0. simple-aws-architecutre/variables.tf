@@ -18,12 +18,11 @@ variable "launch_template" {
     ebs_volume_size        = number
     extra_user_data        = string
     update_default_version = bool
-
   })
   description = "Launch Template을 생성 혹은 갱신한다. "
   default = {
-    ebs_type               = "t3.small"
-    ec2_type               = "gp2"
+    ec2_type               = "t3.small"
+    ebs_type               = "gp2"
     ebs_volume_size        = 15
     extra_user_data        = ""
     update_default_version = true
@@ -47,6 +46,7 @@ variable "asg" {
 variable "alb_deletion_protection" {
   type        = bool
   description = "참이면 ALB를 바로 삭제할 수 없고, 콘솔이나 CLI에서 종료 보호 기능을 disable한 후에 제거 가능하다."
+  default     = false
 }
 
 variable "ecr" {
