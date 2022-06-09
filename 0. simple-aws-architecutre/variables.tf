@@ -20,7 +20,7 @@ variable "launch_template" {
     update_default_version = bool
 
   })
-  description = "Launch Template을 생성 혹은 갱신한다."
+  description = "Launch Template을 생성 혹은 갱신한다. "
   default = {
     ebs_type               = "t3.small"
     ec2_type               = "gp2"
