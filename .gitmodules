@@ -1,6 +1,3 @@
-[submodule "keep/app/helm-charts"]
-	path = keep/app/helm-charts
-	url = https://github.com/kaonmir/nemo-helm-charts
 [submodule "0. simple-architecutre"]
 	path = 0. simple-architecutre
 	url = https://github.com/kaonmir/terraform-aws-simple-architecture
@@ -10,3 +7,6 @@
 [submodule "1. eks-cluster"]
 	path = 1. eks-cluster
 	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster
+[submodule "5. nemo-smart-helm-chart"]
+	path = 5. nemo-smart-helm-chart
+	url = https://github.com/kaonmir/nemo-helm-charts
