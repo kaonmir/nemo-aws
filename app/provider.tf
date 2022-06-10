@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = local.region
 }
 
 provider "helm" {

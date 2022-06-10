@@ -1,23 +1,49 @@
 locals {
-  region = "ap-northeast-2"
+  region       = "ap-northeast-2"
+  cluster_name = "nemo"
 }
-# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster/aws/0.0.0?tab=inputs
+
+# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster/aws
 module "eks-cluster" {
+  # count  = 0 # skip
   source = "kaonmir/nemo-eks-cluster/aws"
-  # version      = "0.1.0"
+  # version = "0.1.0"
+
   aws_region   = local.region
-  cluster_name = "nemo"
+  cluster_name = local.cluster_name
 }
 
-# https://github.com/kaonmir/terraform-aws-nemo-eks-cluster-autoscale
+# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster-autoscale/aws
 module "eks-cluster-autoscale" {
-  source = "kaonmir/nemo-eks-cluster-autoscale/aws"
-  # version      = "0.1.0"
-  aws_region   = local.region
-  cluster_name = "nemo"
+  # count      = 0 # skip
+  depends_on = [module.eks-cluster.cluster]
+  source     = "kaonmir/nemo-eks-cluster-autoscale/aws"
+  # version    = "0.1.0"
 
-  depends_on = [
-    module.eks-cluster.cluster
-  ]
+  aws_region   = local.region
+  cluster_name = local.cluster_name
+}
+
+# ---
+
+# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster/aws
+module "eks-cluster-2" {
+  # count  = 0 # skip
+  source = "kaonmir/nemo-eks-cluster/aws"
+  # version = "0.1.0"
+
+  aws_region   = local.region
+  cluster_name = "semo"
+}
+
+# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster-autoscale/aws
+module "eks-cluster-autoscale-2" {
+  # count      = 0 # skip
+  source     = "kaonmir/nemo-eks-cluster-autoscale/aws"
+  depends_on = [module.eks-cluster-2.cluster]
+  # version    = "0.1.0"
+
+  aws_region   = local.region
+  cluster_name = "semo"
 }
 
