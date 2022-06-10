@@ -1,8 +1,9 @@
+BASEDIR=$(dirname $0)
+
 # Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
 curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.20.0/install.sh | bash -s v0.20.0
 
 # "Argocd", "Prometheus", "Grafana" will be installed by Helm
-
 # Create namespace where the operators will be installed
 kubectl create namespace observability
 

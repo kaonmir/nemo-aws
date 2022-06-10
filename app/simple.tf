@@ -27,9 +27,3 @@ module "simple-nemo" {
     port               = 8080
   }
 }
-
-# ----- IAM USER : kaonmir -----
-# AKIA3IN4TEP4UVVSNZOZ
-# q3gfEoptfq57EFrAjFDBgpDNxilMX07fFnTIL/qL
-# ap-northeast-2
-# json
