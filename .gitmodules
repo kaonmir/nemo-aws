@@ -4,3 +4,6 @@
 [submodule "0. simple-architecutre"]
 	path = 0. simple-architecutre
 	url = https://github.com/kaonmir/terraform-aws-simple-architecture
+[submodule "2. eks-cluster-autoscale"]
+	path = 2. eks-cluster-autoscale
+	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster-autoscale
