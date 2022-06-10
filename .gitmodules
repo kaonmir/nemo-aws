@@ -7,3 +7,6 @@
 [submodule "2. eks-cluster-autoscale"]
 	path = 2. eks-cluster-autoscale
 	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster-autoscale
+[submodule "1. eks-cluster"]
+	path = 1. eks-cluster
+	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster
