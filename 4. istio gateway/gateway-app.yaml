@@ -1,14 +1,14 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: gateway-business
+  name: gateway-app
   namespace: default
 spec:
   selector:
     role: business
   servers:
     - hosts:
-        - "boutique.app.kaonmir.xyz"
+        - "*.app.kaonmir.xyz"
       port:
         name: http
         number: 80
