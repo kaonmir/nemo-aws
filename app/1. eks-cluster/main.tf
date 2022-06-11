@@ -1,6 +1,6 @@
 locals {
   region       = "ap-northeast-2"
-  cluster_name = "nemo"
+  cluster_name = "nemo-kube"
 }
 
 module "eks-cluster" {
