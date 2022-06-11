@@ -6,6 +6,7 @@ module "simple-demo" {
   # count        = 0 # skip
   source       = "kaonmir/simple-architecture/aws"
   version      = "0.6.1"
-  project_name = "demo"
+  project_name = "nemo"
   aws_region   = local.region
+
 }
