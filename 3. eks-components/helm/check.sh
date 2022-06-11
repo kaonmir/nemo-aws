@@ -5,8 +5,8 @@ echo "Argocd is running, initial id='admin' and pw is='$ARGOCD_PW' unless you ch
 
 # Grafana
 # Dashboard: 11074
-GRAFANA_ID=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-user}' | base64 -d)
-GRAFANA_PW=$(k get secret grafana -n istio-system -o jsonpath='{.data.admin-password}' | base64 -d)
+GRAFANA_ID=$(kubectl get secret grafana -n istio-system -o jsonpath='{.data.admin-user}' | base64 -d)
+GRAFANA_PW=$(kubectl get secret grafana -n istio-system -o jsonpath='{.data.admin-password}' | base64 -d)
 echo "ID: $GRAFANA_ID, PW: $GRAFANA_PW"
 
  
