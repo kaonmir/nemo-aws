@@ -24,7 +24,7 @@ kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/downl
 
 # Kiali
 helm repo add kiali https://kiali.org/helm-charts
-helm install kiali-operator kiali/kiali-operator -n observability
+helm install kiali-operator kiali/kiali-operator -n observability \
   --set cr.create="true" \
   --set cr.namespace="istio-system"
     
