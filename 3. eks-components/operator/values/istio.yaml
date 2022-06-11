@@ -35,9 +35,9 @@ spec:
             # service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
 
       - enabled: true
-        name: istio-ingressgateway-business
+        name: istio-ingressgateway-app
         label:
-          role: business
+          role: app
         k8s:
           nodeSelector:
             role: nodegroup_admin
