@@ -10,10 +10,6 @@ spec:
   components:
     ingressGateways:
       - enabled: true
-        name: ingressgateway
-        label:
-          role: ingressgateway
-      - enabled: true
         name: istio-ingressgateway-admin
         label:
           role: admin

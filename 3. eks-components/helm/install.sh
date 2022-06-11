@@ -15,7 +15,11 @@ helm install cert-manager jetstack/cert-manager -n cert-manager -f $BASEDIR/valu
 
 # metric-server (for HPA, VPA and "kubectl top")
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-  
+
+# Fluent Bit
+helm repo add fluent https://fluent.github.io/helm-charts
+helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
+
 # Argocd 
 kubectl create namespace argocd
 helm repo add argocd https://argoproj.github.io/argo-helm
@@ -29,10 +33,6 @@ helm install prometheus prometheus/prometheus -n istio-system -f $BASEDIR/values
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana -n istio-system -f $BASEDIR/values/grafana.yaml
 # helm install loki grafana/loki -n istio-system -f values/loki.yaml
-
-# Fluent Bit
-helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
 
 
 #- Extracing crucial data -#
