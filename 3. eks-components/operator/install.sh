@@ -20,7 +20,7 @@ helm install istio-base istio/base -n istio-system
 istioctl operator init
 
 # Jaeger
-kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.32.0/jaeger-operator.yaml -n observability
+kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.34.1/jaeger-operator.yaml -n observability
 
 # Kiali
 helm repo add kiali https://kiali.org/helm-charts

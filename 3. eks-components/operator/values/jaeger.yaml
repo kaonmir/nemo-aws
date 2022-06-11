@@ -5,8 +5,6 @@ metadata:
   name: jaeger
   namespace: istio-system
 spec:
-  selector:
-    name: jaeger-operator
   strategy: production
   collector:
     #   maxReplicas: 5
