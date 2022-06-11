@@ -2,8 +2,6 @@
 
 # TODO: admin node에서 daemonset 빼기
 
-BASEDIR=$(dirname $0)
-
 # namespaces
 kubectl create namespace istio-system
 kubectl create namespace cert-manager
@@ -11,27 +9,27 @@ kubectl create namespace cert-manager
 # cert-manager
 helm repo add jetstack https://charts.jetstack.io
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
-helm install cert-manager jetstack/cert-manager -n cert-manager -f $BASEDIR/values/cert-manager.yaml --version v1.7.1
+helm install cert-manager jetstack/cert-manager -n cert-manager -f values/cert-manager.yaml --version v1.7.1
 
 # metric-server (for HPA, VPA and "kubectl top")
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # Fluent Bit
 helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
+helm install fluent-bit fluent/fluent-bit -n istio-system -f values/fluent-bit.yaml
 
 # Argocd 
 kubectl create namespace argocd
 helm repo add argocd https://argoproj.github.io/argo-helm
-helm install argocd argocd/argo-cd -n argocd -f $BASEDIR/values/argocd.yaml
+helm install argocd argocd/argo-cd -n argocd -f values/argocd.yaml
 
 # Prometheus
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
-helm install prometheus prometheus/prometheus -n istio-system -f $BASEDIR/values/prometheus.yaml
+helm install prometheus prometheus/prometheus -n istio-system -f values/prometheus.yaml
 
 # Grafana & Grafana Loki
 helm repo add grafana https://grafana.github.io/helm-charts
-helm install grafana grafana/grafana -n istio-system -f $BASEDIR/values/grafana.yaml
+helm install grafana grafana/grafana -n istio-system -f values/grafana.yaml
 # helm install loki grafana/loki -n istio-system -f values/loki.yaml
 
 

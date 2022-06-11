@@ -16,7 +16,7 @@ helm install calico projectcalico/tigera-operator --version v3.21.4
 kubectl create namespace istio-system
 kubectl label namespace default istio-injection=enabled --overwrite
 helm repo add istio https://istio-release.storage.googleapis.com/charts
-# helm install istio-base istio/base -n istio-system
+helm install istio-base istio/base -n istio-system
 istioctl operator init
 
 # Jaeger

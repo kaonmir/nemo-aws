@@ -5,13 +5,13 @@ metadata:
   name: jaeger
   namespace: istio-system
 spec:
+  selector:
+    name: jaeger-operator
   strategy: production
   collector:
     #   maxReplicas: 5
   agent:
     strategy: DaemonSet
-    nodeSelector:
-      role: nodegroup_admin
     tolerations:
       - key: "TAINED_BY_ADMIN"
         operator: "Exists"
