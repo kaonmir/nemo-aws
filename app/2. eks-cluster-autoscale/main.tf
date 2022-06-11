@@ -4,8 +4,6 @@ locals {
 }
 
 module "eks-cluster-autoscale" {
-  # count = 0 # skip
-  # depends_on = [module.eks-cluster.cluster]
   source  = "kaonmir/nemo-eks-cluster-autoscale/aws"
   version = "0.3.0"
 

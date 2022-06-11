@@ -4,7 +4,6 @@ locals {
 }
 
 module "eks-cluster" {
-  # count   = 0 # skip
   source  = "kaonmir/nemo-eks-cluster/aws"
   version = "0.9.0"
 
