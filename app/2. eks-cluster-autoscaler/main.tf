@@ -1,6 +1,6 @@
 locals {
   region       = "ap-northeast-2"
-  cluster_name = "nemo-kube"
+  cluster_name = "nemo"
 }
 
 module "eks-cluster-autoscale" {
