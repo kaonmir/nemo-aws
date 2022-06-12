@@ -1,12 +1,12 @@
 [submodule "0. simple-architecutre"]
-	path = 0. simple-architecutre
+	path = src/0. simple-architecutre
 	url = https://github.com/kaonmir/terraform-aws-simple-architecture
-[submodule "2. eks-cluster-autoscale"]
-	path = 2. eks-cluster-autoscaler
+[submodule "2. eks-cluster-autoscaler"]
+	path = src/2. eks-cluster-autoscaler
 	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster-autoscaler
 [submodule "1. eks-cluster"]
-	path = 1. eks-cluster
+	path = src/1. eks-cluster
 	url = https://github.com/kaonmir/terraform-aws-nemo-eks-cluster
 [submodule "5. nemo-smart-helm-chart"]
-	path = 5. nemo-smart-helm-chart
+	path = src/5. nemo-smart-helm-chart
 	url = https://github.com/kaonmir/nemo-helm-charts
