@@ -1,0 +1,67 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argocd
+  namespace: default
+spec:
+  gateways:
+    - default/gateway-admin
+  hosts:
+    - argocd.admin.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: "argocd-server.argocd.svc.cluster.local"
+            port:
+              number: 443
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: kiali
+  namespace: default
+spec:
+  gateways:
+    - default/gateway-admin # namespace/gateway
+  hosts:
+    - kiali.admin.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: kiali.istio-system.svc.cluster.local
+            port:
+              number: 20001
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: grafana
+  namespace: default
+spec:
+  gateways:
+    - default/gateway-admin # namespace/gateway
+  hosts:
+    - grafana.admin.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: grafana.istio-system.svc.cluster.local
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: jaeger
+  namespace: default
+spec:
+  gateways:
+    - default/gateway-admin # namespace/gateway
+  hosts:
+    - jaeger.admin.kaonmir.xyz
+  http:
+    - route:
+        - destination:
+            host: jaeger-query.istio-system.svc.cluster.local
+            port:
+              number: 16686

@@ -1,0 +1,65 @@
+# https://kiali.io/docs/configuration/kialis.kiali.io/
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  istio_namespace: "istio-system"
+  namespace: istio-system
+  deployment:
+    accessible_namespaces:
+      - "**" # All namespaces
+  external_services:
+    custom_dashboards:
+      discovery_auto_threshold: 10
+      discovery_enabled: "auto"
+      enabled: true
+    grafana:
+      auth:
+        ca_file: ""
+        insecure_skip_verify: false
+        use_kiali_token: true
+        type: "basic" # none,basic,bearer
+        username: "admin"
+        password: "FKfAQO30q3RlehNk3VLBmi3XzN3cqi2VzKCqITfy"
+        token: ""
+      enabled: true
+      health_check_url: ""
+      in_cluster_url: "http://grafana.istio-system.svc:80"
+      is_core: false
+      url: "http://grafana.semo.kaonmir.xyz:80"
+    prometheus:
+      auth:
+        ca_file: ""
+        insecure_skip_verify: false
+        password: ""
+        token: ""
+        type: "none"
+        use_kiali_token: false
+        username: ""
+      cache_duration: 10
+      cache_enabled: true
+      cache_expiration: 300
+      # default: custom_headers is empty
+      custom_headers:
+        customHeader1: "customHeader1Value"
+      health_check_url: ""
+      is_core: true
+      url: "http://prometheus-server.istio-system.svc:9090"
+    tracing:
+      auth:
+        ca_file: ""
+        insecure_skip_verify: false
+        password: ""
+        token: ""
+        type: "none"
+        use_kiali_token: false
+        username: ""
+      enabled: true
+      in_cluster_url: "http://jaeger-query.istio-system.svc:16685/jaeger"
+      is_core: false
+      namespace_selector: true
+      url: ""
+      use_grpc: true
+      whitelist_istio_system: ["jaeger-query", "istio-ingressgateway"]

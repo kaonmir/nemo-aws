@@ -1,0 +1,45 @@
+controller:
+  nodeSelector:
+    role: nodegroup_admin
+  tolerations:
+    - key: "TAINED_BY_ADMIN"
+      operator: "Exists"
+      effect: "NoSchedule"
+dex:
+  nodeSelector:
+    role: nodegroup_admin
+  tolerations:
+    - key: "TAINED_BY_ADMIN"
+      operator: "Exists"
+      effect: "NoSchedule"
+redis:
+  podAnnotations: {}
+  podLabels: {}
+  nodeSelector:
+    role: nodegroup_admin
+  tolerations:
+    - key: "TAINED_BY_ADMIN"
+      operator: "Exists"
+      effect: "NoSchedule"
+server:
+  nodeSelector:
+    role: nodegroup_admin
+  tolerations:
+    - key: "TAINED_BY_ADMIN"
+      operator: "Exists"
+      effect: "NoSchedule"
+  extraArgs:
+    - --insecure
+repoServer:
+  nodeSelector:
+    role: nodegroup_admin
+  tolerations:
+    - key: "TAINED_BY_ADMIN"
+      operator: "Exists"
+      effect: "NoSchedule"
+configs:
+  secret:
+    # admin / admin1234
+    argocdServerAdminPassword: $2b$10$QkGQL1L00nBebiuIXlCYFOOBUVkTt/Z96.mHLWGAUDvNXsM1AxNbS
+    argocdServerAdminPasswordMtime: 2020-07-01T00:00:00Z
+  url: https://argocd.semo.kaonmir.xyz
