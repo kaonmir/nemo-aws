@@ -3,6 +3,7 @@ locals {
   cluster_name = "nemo"
 }
 
+# https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster/aws/0.10.0
 module "eks-cluster" {
   source  = "kaonmir/nemo-eks-cluster/aws"
   version = "0.10.0"

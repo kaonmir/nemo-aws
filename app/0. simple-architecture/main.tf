@@ -2,6 +2,7 @@ locals {
   region = "ap-northeast-2"
 }
 
+# https://registry.terraform.io/modules/kaonmir/simple-architecture/aws/0.6.2
 module "simple-nemo" {
   # count        = 0 # skip
   source       = "kaonmir/simple-architecture/aws"
