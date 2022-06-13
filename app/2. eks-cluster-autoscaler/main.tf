@@ -1,6 +1,7 @@
 locals {
   region       = "ap-northeast-2"
   cluster_name = "nemo"
+  #! 무조건 1. eks-cluster의 이름과 같아야 한다.
 }
 
 # https://registry.terraform.io/modules/kaonmir/nemo-eks-cluster-autoscale/aws/0.4.0
