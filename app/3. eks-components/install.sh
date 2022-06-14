@@ -17,8 +17,8 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 # --DaemonSet--
 # Fluent Bit
-helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
+# helm repo add fluent https://fluent.github.io/helm-charts
+# helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
 
 # Prometheus
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
