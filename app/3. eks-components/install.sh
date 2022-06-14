@@ -15,6 +15,15 @@ helm install cert-manager jetstack/cert-manager -n cert-manager -f $BASEDIR/valu
 # metric-server (for HPA, VPA and "kubectl top")
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
+# --DaemonSet--
+# Fluent Bit
+helm repo add fluent https://fluent.github.io/helm-charts
+helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
+
+# Prometheus
+helm repo add prometheus https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus/prometheus -n istio-system -f $BASEDIR/values/prometheus.yaml
+
 # -- Operator -- 
 # Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
 curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.20.0/install.sh | bash -s v0.20.0
@@ -48,18 +57,10 @@ helm install kiali-operator kiali/kiali-operator -n observability \
 kubectl apply -f $BASEDIR/operator
   
 # --Helm--
-# Fluent Bit
-helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluent-bit fluent/fluent-bit -n istio-system -f $BASEDIR/values/fluent-bit.yaml
-
 # Argocd 
 kubectl create namespace argocd
 helm repo add argocd https://argoproj.github.io/argo-helm
 helm install argocd argocd/argo-cd -n argocd -f $BASEDIR/values/argocd.yaml
-
-# Prometheus
-helm repo add prometheus https://prometheus-community.github.io/helm-charts
-helm install prometheus prometheus/prometheus -n istio-system -f $BASEDIR/values/prometheus.yaml
 
 # Grafana & Grafana Loki
 helm repo add grafana https://grafana.github.io/helm-charts
