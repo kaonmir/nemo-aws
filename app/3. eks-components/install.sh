@@ -44,6 +44,9 @@ helm install kiali-operator kiali/kiali-operator -n observability \
   --set cr.create="true" \
   --set cr.namespace="istio-system"
     
+# --Install Opeartor Resource --
+kubectl apply -f $BASEDIR/operator
+  
 # --Helm--
 # Fluent Bit
 helm repo add fluent https://fluent.github.io/helm-charts
