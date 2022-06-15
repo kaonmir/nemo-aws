@@ -14,4 +14,10 @@ module "eks-cluster" {
 
   admin_ec2_type = "t3.medium"
   app_ec2_type   = "t3.medium"
+
+  app_auto_scaling_group = {
+    desired_size = 3
+    max_size     = 5
+    min_size     = 1
+  }
 }
