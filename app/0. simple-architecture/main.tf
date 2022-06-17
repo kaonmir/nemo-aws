@@ -8,4 +8,9 @@ module "simple-nemo" {
   version      = "0.7.0"
   project_name = "son"
   aws_region   = local.region
+  image = {
+    registry   = ""
+    repository = "nginx"
+    tag        = "v1.2.3"
+  }
 }
