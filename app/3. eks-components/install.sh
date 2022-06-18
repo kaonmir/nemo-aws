@@ -34,7 +34,7 @@ kubectl create namespace observability
 
 # Calico
 # https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/calico.html
-helm repo add projectcalico https://docs.projectcalico.org/charts
+helm repo add projectcalico https://docs.projectcalico.org/charts 
 helm install calico projectcalico/tigera-operator --version v3.21.4
 
 # Istio
